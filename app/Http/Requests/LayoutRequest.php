@@ -21,13 +21,13 @@ class LayoutRequest extends FormRequest
     public function messages()
     {
         return [
-            'required' => ':attribute ne doit pas être vide',
-            'exists' => ':attribute introuvable',
-            'numeric' => ':attribute doit être numérique',
-            'mimes' => ':attribute : format invalide',
-            'size' => ':attribute : nombre de caractères invalide',
-            'email' => ':attribute invalide',
-            'unique' => ':attribute déjà pris',
+            // 'required' => ':attribute ne doit pas être vide',
+            // 'exists' => ':attribute introuvable',
+            // 'numeric' => ':attribute doit être numérique',
+            // 'mimes' => ':attribute : format invalide',
+            // 'size' => ':attribute : nombre de caractères invalide',
+            // 'email' => ':attribute invalide',
+            // 'unique' => ':attribute déjà pris',
         ];
     }
 

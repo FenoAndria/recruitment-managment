@@ -18,6 +18,7 @@ class RegisterRequest extends LayoutRequest
         return [
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', Rules\Password::defaults()],
+            'role_id' => ['required', 'exists:roles,id']
         ];
     }
 }

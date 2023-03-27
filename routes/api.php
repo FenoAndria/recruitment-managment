@@ -25,6 +25,7 @@ Route::get('/', function () {
     return [
         'message' => 'Welcome'
     ];
-})->name('api-home');
+})->middleware('auth')->name('api-home');
 
-
+Route::post('/auth/login', [AuthController::class, 'login'])->name('app-login');
+Route::post('/auth/register', [AuthController::class, 'register'])->name('app-register');
