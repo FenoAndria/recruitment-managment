@@ -44,14 +44,13 @@ export default {
   },
   methods: {
     login() {
-      API()
-        .post("/auth/login", this.user)
+      this.$store.dispatch('LOGIN',this.user)
         .then((result) => {
-          // console.log(result);
-          this.$router.push({ name: "Dashboard" });
+          console.log(result);
+          // this.$router.push({ name: "Dashboard" });
         })
         .catch((err) => {
-          console.log(err);
+          console.log(err.response);
         });
     },
   },
