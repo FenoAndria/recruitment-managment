@@ -9,16 +9,15 @@
 
         <title>{{ config('app.name') }}</title>
 
-        <style>[x-cloak] { display: none !important; }</style>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        @livewireStyles
-        @livewireScripts
         @stack('scripts')
     </head>
 
     <body class="antialiased">
-        {{ $slot }}
-
-        @livewire('notifications')
+        {{-- {{ $slot }} --}}
+        <div id="app"></div>
+        <script>
+            // window.Laravel = {csrfToken : '{{ csrf_token() }}'}
+        </script>
     </body>
 </html>

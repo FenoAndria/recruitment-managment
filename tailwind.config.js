@@ -1,7 +1,13 @@
 const colors = require('tailwindcss/colors')
 
 module.exports = {
-    content: ['./resources/**/*.blade.php', './vendor/filament/**/*.blade.php'],
+    content: [
+        "./src/**/*.{vue,js,ts,jsx,tsx}",
+        './src/**/*.{html,js}',
+        './resources/**/*.blade.php',
+        './resources/**/*.vue',
+        "./index.html",
+    ],
     theme: {
         extend: {
             colors: {
@@ -15,5 +21,6 @@ module.exports = {
     plugins: [
         require('@tailwindcss/forms'),
         require('@tailwindcss/typography'),
+        require('daisyui')
     ],
 }
