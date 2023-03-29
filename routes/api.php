@@ -26,9 +26,12 @@ Route::get('/', function () {
         'message' => 'Welcome'
     ];
 })->middleware('auth')->name('api-home');
+
 Route::middleware('auth:sanctum')->group(function(){
     Route::post('/auth/logout', [AuthController::class, 'logout'])->name('app-logout');
 
+    Route::post();
 });
+
 Route::post('/auth/login', [AuthController::class, 'login'])->name('app-login');
 Route::post('/auth/register', [AuthController::class, 'register'])->name('app-register');
