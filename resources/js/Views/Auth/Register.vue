@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <GuestLayout>
     <h1>REGISTER</h1>
     <div class="">
       <form @submit.prevent="register">
@@ -49,12 +49,13 @@
         ></label
       >
     </div>
-  </div>
+  </GuestLayout>
 </template>
 <script>
-import API from "./../../Services/API";
+import GuestLayout from "./../GuestLayout.vue";
+
 export default {
-  name: "Login",
+  name: "Register",
   data() {
     return {
       user: {
@@ -66,16 +67,21 @@ export default {
   },
   methods: {
     register() {
-      API()
-        .post("/auth/register", this.user)
+      this.$store
+        .dispatch("REGISTER", this.user)
         .then((result) => {
           // console.log(result);
-          this.$router.push({ name: "Dashboard" });
+          localStorage.setItem("userToken", result.data.user.token);
+          location.reload();
+          // this.$router.push({ name: "Dashboard" });
         })
         .catch((err) => {
-          console.log(err);
+          console.log(err.response);
         });
     },
+  },
+  components: {
+    GuestLayout,
   },
 };
 </script>

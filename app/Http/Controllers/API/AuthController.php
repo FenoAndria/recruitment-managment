@@ -17,8 +17,8 @@ class AuthController extends Controller
 			$user = $userService->createUser($request->validated());
 			$login = $userService->login($request->validated());
 			return response()->json([
-				'message' => 'Utilisateur enregistré et connecté',
-				'loginData' => $login, 
+				'message' => 'User registered and connected',
+				'user' => $login, 
 			], 200);
 		} catch (Exception $e) {
 			return response()->json([
@@ -33,12 +33,12 @@ class AuthController extends Controller
 			$login = $userService->login($request->validated());
 			if ($login) {
 				return response()->json([
-					'message' => 'Vous êtes connecté',
+					'message' => 'User connected',
 					'user' => $login,
 				], 200);
 			} else {
 				return response()->json([
-					'errors' => 'Utilisateur non identifié',
+					'errors' => 'User unauthenticated',
 				], 403);
 			}
 		} catch (\Throwable $th) {
@@ -54,7 +54,7 @@ class AuthController extends Controller
 		$user = auth()->user();
 		$user->tokens()->delete();
 		return response()->json([
-			'message' => 'Utilisateur déconnecté',
+			'message' => 'User disconnected',
 		]);
 	}
 }

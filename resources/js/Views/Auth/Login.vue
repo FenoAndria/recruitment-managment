@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <GuestLayout>
     <h1>Login</h1>
     <div class="">
       <form @submit.prevent="login">
@@ -28,10 +28,11 @@
         ></label
       >
     </div>
-  </div>
+  </GuestLayout>
 </template>
 <script>
-import API from "./../../Services/API";
+import GuestLayout from './../GuestLayout.vue'
+
 export default {
   name: "Login",
   data() {
@@ -46,7 +47,9 @@ export default {
     login() {
       this.$store.dispatch('LOGIN',this.user)
         .then((result) => {
-          console.log(result);
+          // console.log(result);
+          localStorage.setItem('userToken',result.data.user.token)
+          location.reload();
           // this.$router.push({ name: "Dashboard" });
         })
         .catch((err) => {
@@ -54,5 +57,8 @@ export default {
         });
     },
   },
+  components:{
+    GuestLayout
+  }
 };
 </script>

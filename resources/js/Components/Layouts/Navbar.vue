@@ -13,9 +13,16 @@ export default {
   name: "Navbar",
   methods: {
     logout() {
-      this.$store.dispatch("LOGOUT").then(() => {
-        this.$router.push({ name: "Login" });
-      });
+      this.$store
+        .dispatch("LOGOUT")
+        .then(() => {
+          localStorage.setItem('userToken','')
+          location.reload();
+          // this.$router.push({ name: "Login" });
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
     },
   },
 };
