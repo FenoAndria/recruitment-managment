@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\Profil;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
