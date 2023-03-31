@@ -4,7 +4,7 @@
   </AppLayout>
 </template>
 <script>
-import AppLayout from "./AppLayout.vue";
+import AppLayout from "../Components/Layouts/AppLayout.vue";
 export default {
   name: "Dashboard",
   components: {

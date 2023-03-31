@@ -52,7 +52,7 @@
   </GuestLayout>
 </template>
 <script>
-import GuestLayout from "./../GuestLayout.vue";
+import GuestLayout from './../../Components/Layouts/GuestLayout.vue'
 
 export default {
   name: "Register",

@@ -5,9 +5,9 @@
   </div>
 </template>
 <script>
-import Navbar from "./../Components/Layouts/Navbar.vue";
+import Navbar from "./Navbar.vue";
 export default {
-  name: "AppLayout",
+  name: "CompanyLayout",
   components: {
     Navbar,
   },

@@ -31,7 +31,7 @@
   </GuestLayout>
 </template>
 <script>
-import GuestLayout from './../GuestLayout.vue'
+import GuestLayout from "./../../Components/Layouts/GuestLayout.vue";
 
 export default {
   name: "Login",
@@ -45,10 +45,11 @@ export default {
   },
   methods: {
     login() {
-      this.$store.dispatch('LOGIN',this.user)
+      this.$store
+        .dispatch("LOGIN", this.user)
         .then((result) => {
           // console.log(result);
-          localStorage.setItem('userToken',result.data.user.token)
+          localStorage.setItem("userToken", result.data.user.token);
           location.reload();
           // this.$router.push({ name: "Dashboard" });
         })
@@ -57,8 +58,8 @@ export default {
         });
     },
   },
-  components:{
-    GuestLayout
-  }
+  components: {
+    GuestLayout,
+  },
 };
 </script>
