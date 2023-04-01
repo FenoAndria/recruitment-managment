@@ -22,7 +22,7 @@ class CompanyController extends Controller
     {
         $company = auth()->user()->company;
         return response()->json([
-            'company' => new CompanyResource($company),
+            'company' => ($company),
         ]);
     }
 
