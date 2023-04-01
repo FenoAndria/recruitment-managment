@@ -1,35 +1,15 @@
 import { createRouter, createWebHistory } from "vue-router";
-
+import store from './../Stores/Index'
 import Dashboard from './../Views/Dashboard.vue'
-import CompanyProfileIndex from './../Views/Company/Profile/Index.vue'
-import CompanyProfileEdit from './../Views/Company/Profile/Edit.vue'
-import CompanyProfileCreate from './../Views/Company/Profile/Create.vue'
 
-import Login from './../Views/Auth/Login.vue'
-import Register from './../Views/Auth/Register.vue'
+
+import CompanyRoutes from "./CompanyRoutes";
+import AuthRoutes from "./AuthRoutes";
 
 import NotFound from './../Views/NotFound.vue'
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        {
-            path: '/register',
-            name: 'Register',
-            component: Register,
-            meta: {
-                middleware: 'guest',
-                title: 'Register'
-            }
-        },
-        {
-            path: '/login',
-            name: 'Login',
-            component: Login,
-            meta: {
-                middleware: 'guest',
-                title: 'Login'
-            }
-        },
         {
             path: '/dashboard',
             name: 'Dashboard',
@@ -38,37 +18,8 @@ const router = createRouter({
                 title: 'Dashboard'
             }
         },
-        {
-            path: '/company/profile/',
-            name: 'CompanyProfile',
-            // component: CompanyProfileIndex,
-            children: [
-                {
-                    path: '',
-                    name: 'CompanyProfileIndex',
-                    component: CompanyProfileIndex,
-                    meta: {
-                        title: 'Company Profile'
-                    }
-                },
-                {
-                    path: 'create',
-                    name: 'CompanyProfileCreate',
-                    component: CompanyProfileCreate,
-                    meta: {
-                        title: 'Company Profile | Create'
-                    }
-                },
-                {
-                    path: 'edit',
-                    name: 'CompanyProfileEdit',
-                    component: CompanyProfileEdit,
-                    meta: {
-                        title: 'Company Profile | Edit'
-                    }
-                },
-            ]
-        },
+        ...AuthRoutes,
+        CompanyRoutes,
         {
             path: '/:pathMatch(.*)*',
             name: 'NotFound',
