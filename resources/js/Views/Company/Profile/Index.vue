@@ -2,6 +2,9 @@
   <CompanyLayout>
     <div class="">
       <h1 class="text-2xl">PROFILE</h1>
+      <div class="">
+            <router-link :to="{ name: 'CompanyProfileCreate' }">Create</router-link>
+          </div>
       <div class="" v-if="loading">Loading profile...</div>
       <div class="" v-else>
         <div class="" v-if="company">

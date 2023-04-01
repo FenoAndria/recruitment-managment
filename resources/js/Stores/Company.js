@@ -13,9 +13,12 @@ const actions = {
     GetCompany: async ({ commit }) => {
         return await API().get('company')
     },
+    StoreCompany: async ({ commit }, company) => {
+        return await API().post('company', company)
+    },
     UpdateCompany: async ({ commit }, company) => {
         return await API().post('company-update', company)
-    }
+    },
 }
 export default {
     state,

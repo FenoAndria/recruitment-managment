@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Dashboard from './../Views/Dashboard.vue'
 import CompanyProfileIndex from './../Views/Company/Profile/Index.vue'
 import CompanyProfileEdit from './../Views/Company/Profile/Edit.vue'
+import CompanyProfileCreate from './../Views/Company/Profile/Create.vue'
 
 import Login from './../Views/Auth/Login.vue'
 import Register from './../Views/Auth/Register.vue'
@@ -48,6 +49,14 @@ const router = createRouter({
                     component: CompanyProfileIndex,
                     meta: {
                         title: 'Company Profile'
+                    }
+                },
+                {
+                    path: 'create',
+                    name: 'CompanyProfileCreate',
+                    component: CompanyProfileCreate,
+                    meta: {
+                        title: 'Company Profile | Create'
                     }
                 },
                 {
