@@ -2,9 +2,6 @@
   <CompanyLayout>
     <div class="">
       <h1 class="text-2xl">PROFILE</h1>
-      <div class="">
-            <router-link :to="{ name: 'CompanyProfileCreate' }">Create</router-link>
-          </div>
       <div class="" v-if="loading">Loading profile...</div>
       <div class="" v-else>
         <div class="" v-if="company">
@@ -16,7 +13,7 @@
           <p>Phone : {{ company.phone }}</p>
           <p>Website : {{ company.website }}</p>
           <p>Description : {{ company.description }}</p>
-          <p>Brand : </p>
+          <p>Brand :</p>
           <img
             :src="'http://localhost:8000' + company.brand"
             alt="profile-image"
@@ -30,7 +27,7 @@
             "
           />
           <div class="">
-            <router-link :to="{ name: 'CompanyProfileEdit' }">Edit</router-link>
+            <router-link :to="{ name: 'CompanyProfileEdit' }" class="btn btn-sm btn-success">Edit</router-link>
           </div>
         </div>
       </div>

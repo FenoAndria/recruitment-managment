@@ -27,7 +27,7 @@ class CompanyService
             $company = new Company();
             $company->fill($companyData);
             /** Attach a profile (COMPANY) to the user **/
-            // $this->user->company()->save($company);
+            $this->user->company()->save($company);
             return $company;
         }
         return false;

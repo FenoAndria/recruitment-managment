@@ -35,7 +35,7 @@
           <label for="">Description</label>
           <input type="text" v-model="this.company.description" />
         </div>
-        <button class="btn">UPDATE</button>
+        <button class="btn">SAVE</button>
       </form>
     </div>
   </CompanyLayout>
@@ -44,7 +44,7 @@
 import { mapGetters } from "vuex";
 import CompanyLayout from "./../../../Components/Layouts/CompanyLayout.vue";
 export default {
-  name: "CompanyProfileEdit",
+  name: "CompanyProfileCreate",
   data() {
     return {
       loading: false,
@@ -82,7 +82,7 @@ export default {
         .dispatch("StoreCompany", companyData)
         .then((result) => {
           console.log(result.data.company);
-          // this.$router.push({ name: "CompanyProfileIndex" });
+          this.$router.push({ name: "CompanyProfileIndex" });
         })
         .catch((err) => {
           console.log(err.response);
