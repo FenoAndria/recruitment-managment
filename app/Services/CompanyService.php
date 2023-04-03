@@ -37,21 +37,13 @@ class CompanyService
     {
         $company = $this->companyExistsForUser();
         if ($company) {
-            $company->fill([
-                'name' => $companyData['name'],
-                'address' => $companyData['address'],
-                'city' => $companyData['city'],
-                'country' => $companyData['country'],
-                'phone' => $companyData['phone'],
-                'description' => $companyData['description'] == '' ? '' : $companyData['description'],
-                'website' => $companyData['website'] == '' ? '' : $companyData['website'],
-                'brand' => $companyData['brand'] ? $companyData['brand'] : $company->brand,
+            $company->update([
+                ...$companyData,
+                'brand' => $companyData['brand'] ? $companyData['brand'] : $company->brand
             ]);
-            $this->user->company()->save($company);
             return $company;
         }
         return false;
-        //TODO: resolve '' from input for nullable column
     }
 
     /**

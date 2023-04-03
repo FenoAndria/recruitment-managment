@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests; 
+namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
@@ -20,22 +20,12 @@ class LayoutRequest extends FormRequest
 
     public function messages()
     {
-        return [
-            // 'required' => ':attribute ne doit pas être vide',
-            // 'exists' => ':attribute introuvable',
-            // 'numeric' => ':attribute doit être numérique',
-            // 'mimes' => ':attribute : format invalide',
-            // 'size' => ':attribute : nombre de caractères invalide',
-            // 'email' => ':attribute invalide',
-            // 'unique' => ':attribute déjà pris',
-        ];
+        return [];
     }
 
     public function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([
-            'success' => false,
-            'errorType' => 'Validation',
             'errors' => $validator->errors()
         ], 422));
     }

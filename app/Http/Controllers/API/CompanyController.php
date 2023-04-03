@@ -22,7 +22,7 @@ class CompanyController extends Controller
     {
         $company = auth()->user()->company;
         return response()->json([
-            'company' => ($company),
+            'company' => new CompanyResource($company),
         ]);
     }
 
@@ -88,7 +88,7 @@ class CompanyController extends Controller
                 return new JsonResponse(
                     data: [
                         'message' => 'Company updated',
-                        'company' => $company,
+                        'company' => new CompanyResource($company),
                     ]
                 );
             } else {
