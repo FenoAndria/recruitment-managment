@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Exceptions\CustomForbiddenException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\JobRequest;
 use App\Http\Resources\JobResource;
@@ -21,7 +22,12 @@ class JobController extends Controller
     public function index()
     {
         $jobs = Job::where('visibility', true)->get();
-        return JobResource::collection($jobs);
+        return new JsonResponse(
+            data: [
+                'message' => 'Listing job',
+                'jobs' => JobResource::collection($jobs)
+            ],
+        );
     }
 
     /**
@@ -59,9 +65,8 @@ class JobController extends Controller
     {
         return new JsonResponse(
             data: [
-                'job' => $job
+                'job' => new JobResource($job)
             ],
-            status: 201
         );
     }
 
@@ -75,6 +80,12 @@ class JobController extends Controller
      */
     public function update(Request $request, JobService $jobService, Job $job)
     {
+        /**
+         * Determine if user can update $job
+         */
+        if ($request->user()->cannot('update', $job)) {
+            throw new CustomForbiddenException();
+        }
         try {
             $jobUpdate = $jobService->updateJob($job, $request->all());
             return new JsonResponse(
@@ -82,7 +93,7 @@ class JobController extends Controller
                     'message' => 'Job updated successfully!',
                     'job' => new JobResource($jobUpdate),
                 ],
-                status: 201
+                status: 200
             );
         } catch (Exception $e) {
             return response()->json([

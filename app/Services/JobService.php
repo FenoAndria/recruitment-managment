@@ -22,7 +22,10 @@ class JobService
     public function createJob(array $jobData): Job
     {
         $job = new Job();
-        $job->fill($jobData);
+        $job->fill([
+            ...$jobData,
+            'company_id'=> $this->user->company->id,
+        ]);
         $job->save();
         return $job;
     }
