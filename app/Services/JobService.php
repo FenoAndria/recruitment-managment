@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Exceptions\CustomForbiddenException;
 use App\Models\Job;
 use App\Models\User;
 
@@ -24,7 +25,7 @@ class JobService
         $job = new Job();
         $job->fill([
             ...$jobData,
-            'company_id'=> $this->user->company->id,
+            'company_id' => $this->user->company->id,
         ]);
         $job->save();
         return $job;
@@ -40,5 +41,27 @@ class JobService
     public function deleteJob(Job $job)
     {
         return $job->delete();
+    }
+
+    public function showJob(Job $job)
+    {
+        // Only job owner can see job with visibility false ???
+        if ($job->company->id !== $this->user->company->id && !$job->visibility) {
+            throw new CustomForbiddenException();
+        } else {
+            return $job;
+        }
+    }
+
+    public function listJob()
+    {
+        // Only job owner can see job with visibility false ???
+        // job->visibility || (!job->visibility && job->company == user->company)
+        return Job::where('visibility', true)
+            ->orWhere(function ($query) {
+                $query->where('visibility', false)
+                    ->where('company_id', auth()->user()->company->id);
+            })
+            ->get();
     }
 }

@@ -19,13 +19,12 @@ class JobController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(JobService $jobService)
     {
-        $jobs = Job::where('visibility', true)->get();
         return new JsonResponse(
             data: [
                 'message' => 'Listing job',
-                'jobs' => JobResource::collection($jobs)
+                'jobs' => JobResource::collection($jobService->listJob())
             ],
         );
     }
@@ -61,11 +60,12 @@ class JobController extends Controller
      * @param  Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function show(Job $job)
+    public function show(JobService $jobService, Job $job)
     {
+        $showJob = $jobService->showJob($job);
         return new JsonResponse(
             data: [
-                'job' => new JobResource($job)
+                'job' => new JobResource($showJob)
             ],
         );
     }
