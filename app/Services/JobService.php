@@ -43,16 +43,6 @@ class JobService
         return $job->delete();
     }
 
-    public function showJob(Job $job)
-    {
-        // Only job owner can see job with visibility false ???
-        if ($job->company->id !== $this->user->company->id && !$job->visibility) {
-            throw new CustomForbiddenException();
-        } else {
-            return $job;
-        }
-    }
-
     public function listJob()
     {
         // Only job owner can see job with visibility false ???

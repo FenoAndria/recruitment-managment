@@ -31,7 +31,7 @@ class JobPolicy
      */
     public function view(User $user, Job $job)
     {
-        //
+        return $job->visibility || ($user->id === $job->company->user->id && !$job->visibility);
     }
 
     /**
@@ -66,7 +66,7 @@ class JobPolicy
      */
     public function delete(User $user, Job $job)
     {
-        //
+        return $user->id === $job->company->user->id;
     }
 
     /**

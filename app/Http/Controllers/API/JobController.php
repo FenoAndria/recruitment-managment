@@ -60,12 +60,17 @@ class JobController extends Controller
      * @param  Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function show(JobService $jobService, Job $job)
+    public function show(Request $request, JobService $jobService, Job $job)
     {
-        $showJob = $jobService->showJob($job);
+        /**
+         * Determine whether the user can view $job
+         */
+        if ($request->user()->cannot('view', $job)) {
+            throw new CustomForbiddenException();
+        }
         return new JsonResponse(
             data: [
-                'job' => new JobResource($showJob)
+                'job' => new JobResource($job)
             ],
         );
     }
@@ -81,7 +86,7 @@ class JobController extends Controller
     public function update(Request $request, JobService $jobService, Job $job)
     {
         /**
-         * Determine if user can update $job
+         * Determine whether the user can update $job
          */
         if ($request->user()->cannot('update', $job)) {
             throw new CustomForbiddenException();
@@ -108,8 +113,14 @@ class JobController extends Controller
      * @param  Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function destroy(JobService $jobService, Job $job)
+    public function destroy(Request $request, JobService $jobService, Job $job)
     {
+        /**
+         * Determine whether the user can delete $job
+         */
+        if ($request->user()->cannot('delete', $job)) {
+            throw new CustomForbiddenException();
+        }
         try {
             $jobDelete = $jobService->deleteJob($job);
             return new JsonResponse(
