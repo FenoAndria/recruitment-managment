@@ -1,14 +1,14 @@
 <template>
-  <AppLayout>
+  <CompanyLayout>
     <h1>Dashboard. Welcome!</h1>
-  </AppLayout>
+  </CompanyLayout>
 </template>
 <script>
-import AppLayout from "../Components/Layouts/AppLayout.vue";
+import CompanyLayout from "../Components/Layouts/CompanyLayout.vue";
 export default {
   name: "Dashboard",
   components: {
-    AppLayout,
+    CompanyLayout,
   },
 };
 </script>

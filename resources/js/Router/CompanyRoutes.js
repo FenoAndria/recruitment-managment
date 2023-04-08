@@ -14,7 +14,6 @@ let isCompany = async () => {
 const CompanyRoutes = {
     path: '/company/profile/',
     name: 'CompanyProfile',
-    // component: CompanyProfileIndex,
     children: [
         {
             path: '',

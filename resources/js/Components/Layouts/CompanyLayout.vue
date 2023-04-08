@@ -1,15 +1,23 @@
 <template>
-  <div>
-    <Navbar />
+  <UserLayout :navlink="this.links">
     <slot></slot>
-  </div>
+  </UserLayout>
 </template>
 <script>
-import Navbar from "./Navbar.vue";
+import UserLayout from "./../Layouts/UserLayout.vue";
 export default {
   name: "CompanyLayout",
+  data() {
+    return {
+      links: [
+        { tag: "Dashboard", name: "Dashboard" },
+        { tag: "My Company", name: "CompanyProfileIndex" },
+        { tag: "Jobs", name: "JobIndex" },
+      ],
+    }
+  },
   components: {
-    Navbar,
+    UserLayout,
   },
 };
 </script>

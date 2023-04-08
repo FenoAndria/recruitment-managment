@@ -1,10 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
-import store from './../Stores/Index'
 import Dashboard from './../Views/Dashboard.vue'
-
 
 import CompanyRoutes from "./CompanyRoutes";
 import AuthRoutes from "./AuthRoutes";
+import JobRoutes from "./JobRoutes";
 
 import NotFound from './../Views/NotFound.vue'
 const router = createRouter({
@@ -18,8 +17,6 @@ const router = createRouter({
                 title: 'Dashboard'
             }
         },
-        ...AuthRoutes,
-        CompanyRoutes,
         {
             path: '/:pathMatch(.*)*',
             name: 'NotFound',
@@ -28,6 +25,9 @@ const router = createRouter({
                 title: 'Page Not Found'
             }
         },
+        ...AuthRoutes,
+        CompanyRoutes,
+        JobRoutes,
     ]
 })
 
