@@ -47,10 +47,11 @@ class JobService
     {
         // Only job owner can see job with visibility false ???
         // job->visibility || (!job->visibility && job->company == user->company)
+        // *company? : user may haven't profile 
         return Job::where('visibility', true)
             ->orWhere(function ($query) {
                 $query->where('visibility', false)
-                    ->where('company_id', auth()->user()->company->id);
+                    ->where('company_id', auth()->user()->company?->id);
             })
             ->get();
     }

@@ -18,11 +18,10 @@ class CompanyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(CompanyService $companyService)
     {
-        $company = auth()->user()->company;
         return response()->json([
-            'company' => new CompanyResource($company),
+            'company' => $companyService->getCompany(),
         ]);
     }
 

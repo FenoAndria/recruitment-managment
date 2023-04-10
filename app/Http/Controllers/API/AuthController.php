@@ -39,7 +39,7 @@ class AuthController extends Controller
 			} else {
 				return response()->json([
 					'errors' => 'User unauthenticated',
-				], 403);
+				], 401);
 			}
 		} catch (\Throwable $th) {
 			return response()->json([

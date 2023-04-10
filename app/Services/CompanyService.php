@@ -2,10 +2,8 @@
 
 namespace App\Services;
 
+use App\Http\Resources\CompanyResource;
 use App\Models\Company;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class CompanyService
 {
@@ -19,6 +17,12 @@ class CompanyService
         /** @var \App\Models\User $user  */
         $user = auth()->user();
         $this->user = $user;
+    }
+
+    public function getCompany()
+    {
+        $company = $this->companyExistsForUser();
+        return $company ? new CompanyResource($company) : null;
     }
 
     public function createCompanyForUser(array $companyData)

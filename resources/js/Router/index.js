@@ -26,7 +26,7 @@ const router = createRouter({
             }
         },
         ...AuthRoutes,
-        CompanyRoutes,
+        ...CompanyRoutes,
         JobRoutes,
     ]
 })
