@@ -70,4 +70,12 @@ class CompanyService
     {
         return Company::where('user_id', $this->user->id)->first();
     }
+
+    /**
+     * Company's jobs
+     */
+    public function getJobs()
+    {
+        return $this->user->company->jobs;
+    }
 }
