@@ -12,7 +12,7 @@
         <div class="" v-for="(job, jobIndex) in jobs" :key="jobIndex">
           <div>
             <h3 class="text-xl">{{ job.title }}</h3>
-            <router-link :to="{ name: 'JobShow', params: { job: job.id } }"
+            <router-link :to="{ name: 'CompanyJobShow', params: { job: job.id } }"
               >Show</router-link
             >
           </div>

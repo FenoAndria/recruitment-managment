@@ -3,7 +3,9 @@ import CompanyProfileEdit from './../Views/Company/Profile/Edit.vue'
 import CompanyProfileCreate from './../Views/Company/Profile/Create.vue'
 
 import CompanyJobIndex from './../Views/Company/Job/Index.vue'
+import CompanyJobShow from './../Views/Company/Job/Show.vue'
 import CompanyJobCreate from './../Views/Company/Job/Create.vue'
+import CompanyJobEdit from './../Views/Company/Job/Edit.vue'
 
 import store from '../Stores/Index';
 
@@ -82,8 +84,17 @@ const CompanyRoutes = [
             {
                 path: ':job',
                 name: 'CompanyJobShow',
+                component: CompanyJobShow,
                 meta: {
                     title: 'Company\'s Job '
+                }
+            },
+            {
+                path: ':job/edit',
+                name: 'CompanyJobEdit',
+                component: CompanyJobEdit,
+                meta: {
+                    title: 'Edit Company\'s Job '
                 }
             },
             {

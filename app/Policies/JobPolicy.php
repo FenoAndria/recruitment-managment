@@ -33,6 +33,17 @@ class JobPolicy
     {
         return $job->visibility || ($user->id === $job->company->user->id && !$job->visibility);
     }
+    /**
+     * Determine whether the user can view the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Job  $job
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function viewCompanyJob(User $user, Job $job)
+    {
+        return $user->id === $job->company->user->id;
+    }
 
     /**
      * Determine whether the user can create models.

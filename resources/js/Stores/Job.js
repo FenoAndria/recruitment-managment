@@ -19,11 +19,17 @@ const actions = {
     GetJob: ({ commit }, job) => {
         return API().get('job/' + job)
     },
+    GetCompanyJobs: () => {
+        return API().get('company-job')
+    },
+    GetCompanyJob: ({ commit }, job) => {
+        return API().get('company-job/' + job)
+    },
     SaveJob: ({ commit }, job) => {
         return API().post('job/', job)
     },
-    GetCompanyJobs: () => {
-        return API().get('company-job')
+    UpdateJob: ({ commit }, job) => {
+        return API().put('job/' + job.id, job)
     },
 }
 export default {
