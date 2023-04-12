@@ -12,7 +12,7 @@ export default {
       links: [
         { tag: "Dashboard", name: "Dashboard" },
         { tag: "My Company", name: "CompanyProfileIndex" },
-        { tag: "Jobs", name: "JobIndex" },
+        { tag: "My Jobs", name: "CompanyJobsIndex" },
       ],
     }
   },

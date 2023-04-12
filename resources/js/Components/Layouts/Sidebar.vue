@@ -24,11 +24,7 @@ export default {
   props: ["navlink"],
   data() {
     return {
-      links: [
-        { tag: "Dashboard", name: "Dashboard" },
-        { tag: "My Company", name: "CompanyProfileIndex" },
-        { tag: "Jobs", name: "JobIndex" },
-      ],
+      
     };
   },
   components: {
