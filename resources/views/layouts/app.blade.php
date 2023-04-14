@@ -9,6 +9,8 @@
 
         <title></title>
 
+        <link rel="stylesheet" href="./../../../assets/bootstrap-icons/bootstrap-icons.css">
+
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         @stack('scripts')
     </head> 

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .navlink{
-    @apply font-semibold text-gray-500 rounded-lg px-4 py-1 transition-all 
+    @apply font-semibold text-gray-500 rounded-lg px-4 py-1 block transition-all 
 }
 .navlink:hover{
     @apply hover:bg-green-500 hover:text-white
@@ -11,7 +11,9 @@
 .navlink-active{
     @apply bg-green-500 text-white
 }
-
+.headTitle{
+    @apply flex items-center text-xl
+}
 /**
 */
 label{
@@ -21,11 +23,22 @@ label{
     @apply input input-sm input-bordered w-full text-base text-gray-700 transition-all
 }
 .x-input-effect{
-    @apply outline-none ring-2 ring-green-500 ring-offset-2 ring-offset-white border-2 border-green-600
+    @apply outline-none ring-2 ring-green-500 ring-offset-2 ring-offset-white border border-green-500
 }
 .x-input:hover,.x-input:focus{
-    @apply x-input-effect h-10
+    @apply x-input-effect 
+}
+.x-textarea{
+    @apply rounded w-full
+}
+.x-textarea:hover,.x-textarea:focus{
+    @apply x-input-effect 
 }
 .x-form{
     @apply my-2
+}
+/**
+*/
+.jobTitle{
+    @apply text-2xl text-gray-500 
 }
