@@ -6,14 +6,20 @@
         <div v-else>
           <form @submit.prevent="submit">
             <div class="x-form">
+              <ValidationError :errors="validationErrors" column="title" />
               <label for="">Title</label>
               <input type="text" v-model="job.title" class="x-input" />
             </div>
             <div class="">
+              <ValidationError :errors="validationErrors" column="deadline" />
               <label for="">Deadline</label>
               <input type="date" v-model="job.deadline" class="x-input" />
             </div>
             <div class="">
+              <ValidationError
+                :errors="validationErrors"
+                column="description"
+              />
               <label for="">Description</label>
               <textarea
                 cols="30"
@@ -23,6 +29,7 @@
               ></textarea>
             </div>
             <div class="">
+              <ValidationError :errors="validationErrors" column="missions" />
               <label for="">Missions</label>
               <textarea
                 cols="30"
@@ -32,6 +39,10 @@
               ></textarea>
             </div>
             <div class="">
+              <ValidationError
+                :errors="validationErrors"
+                column="profile_required"
+              />
               <label for="">Profile required</label>
               <textarea
                 cols="30"
@@ -40,6 +51,8 @@
                 class="x-textarea"
               ></textarea>
             </div>
+            <ValidationError :errors="validationErrors" column="visibility" />
+            <ValidationError :errors="validationErrors" column="urgent" />
             <div class="py-2 flex items-center space-x-4 text-white">
               <div
                 class="
@@ -96,6 +109,7 @@ import { mapGetters } from "vuex";
 import CompanyLayout from "./../../../Components/Layouts/CompanyLayout.vue";
 import Card from "./../../../Components/Layouts/Card.vue";
 import SubmitButton from "./../../../Components/Layouts/SubmitButton.vue";
+import ValidationError from "./../../../Components/Layouts/ValidationError.vue";
 
 export default {
   name: "CompanyJobEdit",
@@ -103,12 +117,14 @@ export default {
     return {
       loading: false,
       loadingSubmit: false,
+      validationErrors: "",
     };
   },
   components: {
     CompanyLayout,
     Card,
-    SubmitButton, 
+    SubmitButton,
+    ValidationError,
   },
   computed: {
     ...mapGetters(["job"]),
@@ -128,6 +144,7 @@ export default {
     },
     submit() {
       this.loadingSubmit = true;
+      this.validationErrors = "";
       /**
        * boolean casting , 'false'/'true' => 0/1
        */
@@ -145,7 +162,9 @@ export default {
         })
         .catch((err) => {
           this.loadingSubmit = false;
-          console.log(err);
+          if (err.response.status === 422) {
+            this.validationErrors = err.response.data.errors;
+          }
         });
     },
   },

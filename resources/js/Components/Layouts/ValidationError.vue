@@ -4,7 +4,7 @@
             <div class="" v-if="errorsIndex == this.$props.column">
                 <div v-for="(e, errIndex) in err" :key="errIndex">
                     <Alert>
-                        <i class="bi bi-info-circle"></i>{{ e }}
+                        <i class="bi bi-info-circle"></i> {{ e }}
                     </Alert>
                 </div>
             </div>
