@@ -77,7 +77,7 @@ class CompanyController extends Controller
      * @param  \App\Services\CompanyService  $companyService
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CompanyService $companyService)
+    public function update(CompanyRequest $request, CompanyService $companyService)
     {
         try {
             $brand = $companyService->uploadBrand($request->file('brand'));
