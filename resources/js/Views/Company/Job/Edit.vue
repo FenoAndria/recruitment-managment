@@ -108,7 +108,7 @@ export default {
   components: {
     CompanyLayout,
     Card,
-    SubmitButton,
+    SubmitButton, 
   },
   computed: {
     ...mapGetters(["job"]),

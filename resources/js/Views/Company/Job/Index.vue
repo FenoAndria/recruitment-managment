@@ -1,10 +1,10 @@
 <template>
   <CompanyLayout>
-    <!-- <div class="text-right">
+    <div class="mb-2">
       <router-link :to="{ name: 'CompanyJobCreate' }">
-        <button class="btn btn-sm btn-primary">Create</button>
+        <button class="btn btn-sm btn-primary"><i class="bi bi-plus-lg"></i> New</button>
       </router-link>
-    </div> -->
+    </div>
     <div v-if="loading">LOADING JOBS...</div>
     <div v-else>
       <div class="flex flex-wrap -mx-2" v-if="jobs">
