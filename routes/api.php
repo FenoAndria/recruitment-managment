@@ -26,31 +26,34 @@ Route::get('/', function () {
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/auth/logout', [AuthController::class, 'logout'])->name('app-logout');
-    /**
-     * Company resources, company update have no parameter
-     * TODO : Company middleware
-     */
-    Route::apiResource('company', CompanyController::class)->except(['update']);
-    Route::post('company-update', [CompanyController::class, 'update'])->name('company.update');
+    Route::middleware('isCompany')->group(function () {
+        /**
+         * Company resources, company update have no parameter
+         */
+        Route::apiResource('company', CompanyController::class)->except(['update']);
+        Route::post('company-update', [CompanyController::class, 'update'])->name('company.update');
+        /**
+         * Company's job show
+         */
+        Route::get('/company-job', [CompanyJobController::class, 'index'])->name('company-job.index');
+        Route::get('/company-job/{job}', [CompanyJobController::class, 'show'])->name('company-job.show');
+        Route::post('/job', [JobController::class, 'store'])->name('job.store');
+        Route::put('/job/{job}', [JobController::class, 'update'])->name('job.update');
+        Route::delete('/job/{job}', [JobController::class, 'destroy'])->name('job.delete');
+    });
     /**
      * Job Resource
      */
-    Route::post('/job', [JobController::class, 'store'])->name('job.store');
-    Route::put('/job/{job}', [JobController::class, 'update'])->name('job.update');
-    Route::delete('/job/{job}', [JobController::class, 'destroy'])->name('job.delete');
     Route::get('/job/{job}', [JobController::class, 'show'])->name('job.show');
     Route::get('/job', [JobController::class, 'index'])->name('job.index');
-    /**
-     * Company's job show
-     */
-    Route::get('/company-job', [CompanyJobController::class, 'index'])->name('company-job.index');
-    Route::get('/company-job/{job}', [CompanyJobController::class, 'show'])->name('company-job.show');
+
     /**
      * Candidate resources, candidate update have no parameter
-     * TODO : Candidate middleware
      */
-    Route::apiResource('candidate', CandidateController::class)->except(['update']);
-    Route::post('candidate-update', [CandidateController::class, 'update'])->name('candidate.update');
+    Route::middleware('isCandidate')->group(function () {
+        Route::apiResource('candidate', CandidateController::class)->except(['update']);
+        Route::post('candidate-update', [CandidateController::class, 'update'])->name('candidate.update');
+    });
 });
 
 Route::post('/auth/login', [AuthController::class, 'login'])->name('app-login');
