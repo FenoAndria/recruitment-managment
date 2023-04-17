@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\CandidateController;
 use App\Http\Controllers\API\CompanyController;
 use App\Http\Controllers\API\CompanyJobController;
 use App\Http\Controllers\API\JobController;
@@ -25,7 +26,7 @@ Route::get('/', function () {
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/auth/logout', [AuthController::class, 'logout'])->name('app-logout');
-
+    //TODO : Company middleware
     Route::apiResource('company', CompanyController::class)->except(['update']);
     Route::post('company-update', [CompanyController::class, 'update'])->name('company.update');
 
@@ -35,8 +36,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/job/{job}', [JobController::class, 'show'])->name('job.show');
     Route::get('/job', [JobController::class, 'index'])->name('job.index');
 
-    Route::get('/company-job',[CompanyJobController::class,'index'])->name('company-job.index');
-    Route::get('/company-job/{job}',[CompanyJobController::class,'show'])->name('company-job.show');
+    Route::get('/company-job', [CompanyJobController::class, 'index'])->name('company-job.index');
+    Route::get('/company-job/{job}', [CompanyJobController::class, 'show'])->name('company-job.show');
+    
+    //TODO : Candidae middleware
+    Route::apiResource('candidate', CandidateController::class);
 });
 
 Route::post('/auth/login', [AuthController::class, 'login'])->name('app-login');
