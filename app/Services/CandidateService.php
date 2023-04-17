@@ -18,14 +18,55 @@ class CandidateService
         $this->user = $user;
     }
 
-    public function getCandidate()
+    public function getCandidate(): Candidate|null
     {
         $candidate = $this->candidateExistsForUser();
         return $candidate;
     }
 
+    public function updateCandidateForUser($candidateData): Candidate|false
+    {
+        $candidate = $this->candidateExistsForUser();
+        if ($candidate) {
+            $candidate->update([
+                ...$candidateData,
+                'photo' => $candidateData['photo'] ? $candidateData['photo'] : $candidate->photo,
+                'resume' => $candidateData['resume'] ? $candidateData['resume'] : $candidate->resume,
+            ]);
+            return $candidate;
+        }
+        return false;
+    }
+
     /**
-     * Verify if user has already a candidate profile
+     * Store candidate's photo
+     **/
+    public function uploadPhoto($photo): string
+    {
+        if ($photo) {
+            $photoName = $photo->hashName();
+            $photoPath = $photo->storeAs('uploads/candidate-photo', $photoName, 'public');
+            return '/storage/' . $photoPath;
+        }
+        return '';
+    }
+    /**
+     * Store candidate's resume
+     * TEMP!!
+     * TODO: ...
+     **/
+    public function uploadResume($resume): string
+    {
+        if ($resume) {
+            $resumeName = $resume->hashName();
+            $resumePath = $resume->storeAs('uploads/candidate-resume', $resumeName, 'public');
+            return '/storage/' . $resumePath;
+        }
+        return '';
+    }
+
+    /**
+     * Check if user has already a candidate profile
      **/
     private function candidateExistsForUser()
     {

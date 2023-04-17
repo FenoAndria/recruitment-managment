@@ -23,7 +23,7 @@ class CompanyRequest extends LayoutRequest
             'website'=> 'nullable',
             'phone'=> 'required',
             'description'=> 'nullable',
-            'brand'=> 'nullable',
+            'brand'=> 'nullable|mimes:jpg,bmp,png',
         ];
     }
 }
