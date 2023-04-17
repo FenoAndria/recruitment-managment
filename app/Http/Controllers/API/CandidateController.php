@@ -30,12 +30,36 @@ class CandidateController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  CandidateRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CandidateRequest $request, CandidateService $candidateService)
     {
-        //
+        try {
+            $photo = $candidateService->uploadPhoto($request->file('photo'));
+            $resume = $candidateService->uploadResume($request->file('resume'));
+            $candidateData = $request->except(['photo','resume']) + ['photo' => $photo, 'resume' => $resume];
+            $candidate = $candidateService->createCandidateForUser($candidateData);
+            if ($candidate) {
+                return new JsonResponse(
+                    data: [
+                        'message' => 'Candidate saved',
+                        'candidate' => new CandidateResource($candidate),
+                    ],
+                    status: 201
+                );
+            } else {
+                return new JsonResponse(
+                    data: ['error' => 'Candidate have already a profile'],
+                    status: 500
+                );
+            }
+        } catch (Exception $e) {
+            return new JsonResponse(
+                data: ['error' => $e->getMessage()],
+                status: 500
+            );
+        }
     }
 
     /**

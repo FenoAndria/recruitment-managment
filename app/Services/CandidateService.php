@@ -24,6 +24,19 @@ class CandidateService
         return $candidate;
     }
 
+    
+    public function createCandidateForUser(array $candidateData): Candidate|false
+    {
+        if (!$this->candidateExistsForUser($this->user->id)) {
+            $candidate = new Candidate();
+            $candidate->fill($candidateData);
+            /** Attach a profile (CANDIDATE) to the user **/
+            $this->user->candidate()->save($candidate);
+            return $candidate;
+        }
+        return false;
+    }
+
     public function updateCandidateForUser($candidateData): Candidate|false
     {
         $candidate = $this->candidateExistsForUser();
@@ -53,7 +66,7 @@ class CandidateService
     /**
      * Store candidate's resume
      * TEMP!!
-     * TODO: ...
+     * TODO: ... combine two functions [upload]
      **/
     public function uploadResume($resume): string
     {

@@ -50,4 +50,12 @@ class User extends Authenticatable
     {
         return $this->hasOne(Company::class);
     }
+
+    /**
+     * TODO : separate users by role
+     */
+    public function candidate(): HasOne
+    {
+        return $this->hasOne(Candidate::class);
+    }
 }
