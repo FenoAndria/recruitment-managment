@@ -22,7 +22,7 @@ class CompanyJobController extends Controller
         return new JsonResponse(
             data: [
                 'message' => 'Company\'s jobs',
-                'jobs' => $companyService->getJobs()
+                'jobs' => JobResource::collection($companyService->getJobs())
             ],
         );
     }

@@ -28,4 +28,9 @@ class Candidate extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function candidature()
+    {
+        return $this->hasMany(Candidature::class);
+    }
 }

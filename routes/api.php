@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CandidateController;
+use App\Http\Controllers\API\CandidatureController;
 use App\Http\Controllers\API\CompanyController;
 use App\Http\Controllers\API\CompanyJobController;
 use App\Http\Controllers\API\JobController;
@@ -40,6 +41,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/job', [JobController::class, 'store'])->name('job.store');
         Route::put('/job/{job}', [JobController::class, 'update'])->name('job.update');
         Route::delete('/job/{job}', [JobController::class, 'destroy'])->name('job.delete');
+        /**
+         * Get candidatures for company's job
+         */
+        Route::get('candidature/for-company', [CandidatureController::class, 'forCompany'])->name('candidatureForCompany');
     });
     /**
      * Job Resource
@@ -53,6 +58,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::middleware('isCandidate')->group(function () {
         Route::apiResource('candidate', CandidateController::class)->except(['update']);
         Route::post('candidate-update', [CandidateController::class, 'update'])->name('candidate.update');
+        /**
+         * Get candidatures by candidate
+         */
+        Route::get('candidature/by-candidate', [CandidatureController::class, 'byCandidate'])->name('candidatureByCandidate');
     });
 });
 
