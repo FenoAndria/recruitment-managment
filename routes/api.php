@@ -45,6 +45,11 @@ Route::middleware('auth:sanctum')->group(function () {
          * Get candidatures for company's job
          */
         Route::get('candidature/for-company', [CandidatureController::class, 'forCompany'])->name('candidatureForCompany');
+        /**
+         * Update candidature [pending,keeped,...]
+         * TODO : middleware company's job
+         */
+        Route::put('candidature/{candidature}', [CandidatureController::class, 'updateCandidature'])->name('updateCandidature');
     });
     /**
      * Job Resource
@@ -62,6 +67,10 @@ Route::middleware('auth:sanctum')->group(function () {
          * Get candidatures by candidate
          */
         Route::get('candidature/by-candidate', [CandidatureController::class, 'byCandidate'])->name('candidatureByCandidate');
+        /**
+         * Store candidatures
+         */
+        Route::post('candidature/{job}', [CandidatureController::class, 'storeCandidature'])->name('storeCandidature');
     });
 });
 

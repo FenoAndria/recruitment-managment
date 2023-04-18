@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CandidatureUpdateRequest;
 use App\Http\Resources\CandidatureResource;
 use App\Http\Resources\JobResource;
+use App\Models\Candidature;
+use App\Models\Job;
 use App\Services\CandidatureService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -26,6 +29,26 @@ class CandidatureController extends Controller
         return new JsonResponse(
             data: [
                 'candidatures' => CandidatureResource::collection($candidatureService->getCandidaturesByCandidate())
+            ]
+        );
+    }
+
+    public function storeCandidature(CandidatureService $candidatureService, Job $job)
+    {
+        return new JsonResponse(
+            data: [
+                'message' => 'Candidature sended successfully',
+                'candidatures' => new CandidatureResource($candidatureService->storeCandidature($job))
+            ]
+        );
+    }
+
+    public function updateCandidature(CandidatureUpdateRequest $request, CandidatureService $candidatureService, Candidature $candidature)
+    {
+        return new JsonResponse(
+            data: [
+                'message' => 'Candidature updated successfully',
+                'candidatures' => new CandidatureResource($candidatureService->updateCandidature($candidature, $request->status))
             ]
         );
     }

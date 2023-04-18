@@ -34,9 +34,22 @@ class CandidatureService
         return $candidatures;
     }
 
-    public function storeCandidature()
+    public function storeCandidature(Job $job): Candidature
     {
-        //
+        return Candidature::create([
+            'job_id' => $job->id,
+            'candidate_id' => $this->user->candidate->id,
+        ]);
+    }
+
+    public function updateCandidature(Candidature $candidature, $status): Candidature
+    {
+        $candidature->update(
+            [
+                'status' => $status
+            ]
+        );
+        return $candidature;
     }
 
     /**
