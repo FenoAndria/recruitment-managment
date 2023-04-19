@@ -47,7 +47,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('candidature/for-company', [CandidatureController::class, 'forCompany'])->name('candidatureForCompany');
         /**
          * Update candidature [pending,keeped,...]
-         * TODO : middleware company's job
          */
         Route::put('candidature/{candidature}', [CandidatureController::class, 'updateCandidature'])->name('updateCandidature');
     });

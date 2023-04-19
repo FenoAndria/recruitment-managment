@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Exceptions\CustomForbiddenException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CandidatureUpdateRequest;
 use App\Http\Resources\CandidatureResource;
@@ -45,6 +46,9 @@ class CandidatureController extends Controller
 
     public function updateCandidature(CandidatureUpdateRequest $request, CandidatureService $candidatureService, Candidature $candidature)
     {
+        if ($request->user()->cannot('update', $candidature)) {
+            throw new CustomForbiddenException();
+        }
         return new JsonResponse(
             data: [
                 'message' => 'Candidature updated successfully',
