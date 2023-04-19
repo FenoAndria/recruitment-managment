@@ -67,12 +67,13 @@ export default {
   methods: {
     login() {
       this.loadingSubmit = true;
-      this.validationErrors = '';
-      this.userNotAuthenticated = '';
+      this.validationErrors = "";
+      this.userNotAuthenticated = "";
       this.$store
         .dispatch("LOGIN", this.user)
         .then((result) => {
           this.loadingSubmit = false;
+          this.$store.commit("SET_USER_DATA", result.data.user);
           localStorage.setItem("userToken", result.data.user.token);
           location.reload();
         })
