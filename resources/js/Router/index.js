@@ -1,22 +1,16 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Dashboard from './../Views/Dashboard.vue'
 
 import CompanyRoutes from "./CompanyRoutes";
 import AuthRoutes from "./AuthRoutes";
 import JobRoutes from "./JobRoutes";
+import CandidateRoutes from "./CandidateRoutes";
 
 import NotFound from './../Views/NotFound.vue'
+import store from "../Stores/Index";
+
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        {
-            path: '/dashboard',
-            name: 'Dashboard',
-            component: Dashboard,
-            meta: {
-                title: 'Dashboard'
-            }
-        },
         {
             path: '/:pathMatch(.*)*',
             name: 'NotFound',
@@ -28,6 +22,7 @@ const router = createRouter({
         ...AuthRoutes,
         ...CompanyRoutes,
         JobRoutes,
+        ...CandidateRoutes
     ]
 })
 
@@ -37,7 +32,11 @@ router.beforeEach((to, from, next) => {
     if (to.meta.middleware == 'guest') {
         if (userToken && (to.name == 'Login' || to.name == 'Register')) {
             //Redirect to Dashboard if user is authenticated
-            next({ name: 'Dashboard' })
+            if (store.getters.USER_DATA.role == 'Company') {
+                next({ name: 'CompanyDashboard' })
+            } else {
+                next({ name: 'CandidateDashboard' })
+            }
         } else {
             next()
         }
