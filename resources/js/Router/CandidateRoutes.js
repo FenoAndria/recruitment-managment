@@ -19,13 +19,53 @@ const CandidateRoutes = [
 
                 },
                 {
-                    path: 'profile',
-                    name: 'CandidateProfileIndex',
-                    component: CandidateProfileIndex,
-                    meta: {
-                        title: 'Candidate Profile',
-                    },
-
+                    path: 'profile/',
+                    name: 'CandidateProfile',
+                    children: [
+                        {
+                            path: '',
+                            name: 'CandidateProfileIndex',
+                            component: CandidateProfileIndex,
+                            meta: {
+                                title: 'Candidate Profile ',
+                            },
+                            beforeEnter: async (to, from, next) => {
+                                if (store.getters.USER_DATA.candidate) {
+                                    next()
+                                } else {
+                                    next({ name: 'CandidateProfileCreate' })
+                                }
+                            }
+                        },
+                        {
+                            path: 'create',
+                            name: 'CandidateProfileCreate',
+                            meta: {
+                                title: 'Candidate Profile | Create',
+                            },
+                            beforeEnter: async (to, from, next) => {
+                                if (store.getters.USER_DATA.candidate) {
+                                    next({ name: 'CandidateProfileIndex' })
+                                } else {
+                                    next()
+                                }
+                            }
+                        },
+                        {
+                            path: 'edit',
+                            name: 'CandidateProfileEdit',
+                            meta: {
+                                title: 'Candidate Profile | Edit',
+                            },
+                            beforeEnter: async (to, from, next) => {
+                                if (store.getters.USER_DATA.candidate) {
+                                    next()
+                                } else {
+                                    next({ name: 'CandidateProfileCreate' })
+                                }
+                            }
+                        },
+                    ]
                 },
                 {
                     path: 'candidatures',
