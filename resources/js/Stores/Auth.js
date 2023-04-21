@@ -7,7 +7,8 @@ const getters = {
     USER_DATA: (state) => state.userData
 }
 const mutations = {
-    SET_USER_DATA: (state, userData) => state.userData = userData
+    SET_USER_DATA: (state, userData) => state.userData = userData,
+    SET_CANDIDATE: (state, candidate) => state.userData.candidate = candidate,
 }
 const actions = {
     LOGIN: async ({ commit }, user) => {

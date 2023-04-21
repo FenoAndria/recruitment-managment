@@ -2,6 +2,7 @@ import store from '../Stores/Index'
 import CandidateDashboard from './../Views/Candidate/CandidateDashboard.vue'
 import CandidateProfileIndex from './../Views/Candidate/Profile/Index.vue'
 import CandidateProfileEdit from './../Views/Candidate/Profile/Edit.vue'
+import CandidateProfileCreate from './../Views/Candidate/Profile/Create.vue'
 
 import CandidatureIndex from './../Views/Candidate/Candidature/Index.vue'
 
@@ -42,6 +43,7 @@ const CandidateRoutes = [
                         {
                             path: 'create',
                             name: 'CandidateProfileCreate',
+                            component: CandidateProfileCreate,
                             meta: {
                                 title: 'Candidate Profile | Create',
                             },
