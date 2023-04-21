@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Company;
 
+use App\Http\Resources\Company\CandidatureResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class JobResource extends JsonResource
@@ -25,8 +26,7 @@ class JobResource extends JsonResource
             'profile_required' => $this->profile_required,
             'urgent' => $this->urgent,
             'visibility' => $this->visibility,
-            'company' => new CompanyResource($this->company),
-            'candidatures' =>($this->candidature),
+            'candidatures' =>CandidatureResource::collection($this->candidature),
         ];
     }
 }

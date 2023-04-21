@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Exceptions\CustomForbiddenException;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\JobResource;
+use App\Http\Resources\Company\JobResource;
 use App\Models\Job;
 use App\Services\CompanyService;
 use App\Services\JobService;

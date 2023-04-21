@@ -2,7 +2,9 @@
   <CompanyLayout>
     <div class="mb-2">
       <router-link :to="{ name: 'CompanyJobCreate' }">
-        <button class="btn btn-sm btn-primary"><i class="bi bi-plus-lg"></i> New</button>
+        <button class="btn btn-sm btn-primary">
+          <i class="bi bi-plus-lg"></i> New
+        </button>
       </router-link>
     </div>
     <div v-if="loading">LOADING JOBS...</div>
@@ -32,6 +34,11 @@
                 <span v-if="job.deadline">{{ job.deadline }}</span>
                 <span class="badge badge-error text-white" v-else>Empty</span>
               </h4>
+            </div>
+            <div class="float-left">
+              <span class="text-warning-600 font-semibold"
+                >{{ job.candidatures.length }} candidature{{ job.candidatures.length > 1 ? "s" : "" }}</span
+              >
             </div>
             <div
               class="
@@ -79,7 +86,7 @@ export default {
         .then((result) => {
           this.$store.commit("SetJobs", result.data.jobs);
           this.loading = false;
-          console.log(result.data.jobs);
+          console.log(result.data.jobs[0]);
         })
         .catch((err) => {
           console.log(err);

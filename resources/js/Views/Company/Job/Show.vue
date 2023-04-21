@@ -42,15 +42,12 @@
                 </h4>
                 <h4>
                   Deadline :
-                  <span v-if="job.deadline">{{ job.deadline }}</span>
+                  <span v-if="job.deadline">{{ this.$dayjs(job.deadline).format("DD MMM YYYY") }}</span>
                   <span class="badge badge-error text-white" v-else>Empty</span>
                 </h4>
               </div>
               <hr class="border border-green-500 mt-1" />
               <div class="mt-1">
-                <h4 class="text-sm text-gray-500 float-left">
-                  Published at : {{ job.published_at }}
-                </h4>
                 <router-link
                   :to="{ name: 'CompanyJobEdit', params: { id: job.id } }"
                 >
@@ -58,7 +55,54 @@
                     <i class="bi bi-pencil-square"></i> Edit
                   </Button>
                 </router-link>
+                <h4 class="text-sm text-gray-500">
+                  Published at : {{ this.$dayjs(job.published_at).format("DD MMM YYYY") }}
+                </h4>
               </div>
+            </div>
+            <div class="mt-4">
+              <span
+                class="
+                  text-xl
+                  font-semibold
+                  text-white
+                  bg-warning-500
+                  rounded
+                  py-0
+                  px-2
+                  max-w-min
+                  leading-none
+                "
+                ><span class="">{{ job.candidatures.length }}</span>
+                Candidature{{ job.candidatures.length > 1 ? "s" : "" }}</span
+              >
+              <table class="table table-compact w-full text-center mt-2">
+                <thead>
+                  <tr>
+                    <th>CANDIDATE</th>
+                    <th>STATUS</th>
+                    <th>DATE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    v-for="(
+                      candidature, candidatureIndex
+                    ) in job.candidatures"
+                    :key="candidatureIndex"
+                  >
+                    <td>{{ candidature.candidate.first_name }} {{ candidature.candidate.last_name }}</td>
+                    <td>
+                      <span class="badge font-semibold">{{
+                        candidature.status
+                      }}</span>
+                    </td>
+                    <td>
+                      {{ this.$dayjs(candidature.date).format("DD MMM YYYY") }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
           <div v-else>EMPTY</div>

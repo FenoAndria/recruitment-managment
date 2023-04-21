@@ -22,7 +22,7 @@
               >
                 <td>{{ candidature.job.title }}</td>
                 <td>{{ candidature.job.company.name }}</td>
-                <td><span class="badge badge-primary font-semibold">{{ candidature.status }}</span></td>
+                <td><span class="badge font-semibold">{{ candidature.status }}</span></td>
                 <td>{{ this.$dayjs(candidature.date).format('DD MMM YYYY')  }}</td>
               </tr>
             </tbody>
