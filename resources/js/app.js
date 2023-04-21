@@ -9,4 +9,9 @@ import App from './App.vue'
 import Router from './Router/index'
 import Store from './Stores'
 
-createApp(App).use(Router).use(Store).mount('#app')
+import dayjs from 'dayjs'
+
+const app = createApp(App)
+app.config.globalProperties.$dayjs = dayjs
+
+app.use(Router).use(Store).mount('#app')
