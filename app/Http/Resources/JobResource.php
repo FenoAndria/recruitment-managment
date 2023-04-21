@@ -26,7 +26,7 @@ class JobResource extends JsonResource
             'urgent' => $this->urgent,
             'visibility' => $this->visibility,
             'company' => new CompanyResource($this->company),
-            'candidatures' => CandidatureResource::collection($this->candidature),
+            // 'candidatures' => CandidatureResource::collection($this->candidature),
         ];
     }
 }

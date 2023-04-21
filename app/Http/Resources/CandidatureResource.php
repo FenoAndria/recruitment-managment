@@ -17,9 +17,10 @@ class CandidatureResource extends JsonResource
         // return parent::toArray($request);
         return [
             'id' => $this->id,
-            'job' => $this->job,
-            'candidate' => $this->candidate,
+            'job' => new JobResource($this->job),
+            'candidate' => new CandidateResource($this->candidate),
             'status' => $this->status,
+            'date' => $this->created_at,
         ];
     }
 }

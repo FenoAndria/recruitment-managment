@@ -73,12 +73,19 @@ const CandidateRoutes = [
                     ]
                 },
                 {
-                    path: 'candidatures',
-                    name: 'CandidatureIndex',
-                    component: CandidatureIndex,
-                    meta: {
-                        title: 'Candidatures',
-                    },
+                    path: 'candidatures/',
+                    name: 'Candidature',
+                    children:
+                        [
+                            {
+                                path: '',
+                                name: 'CandidatureIndex',
+                                component: CandidatureIndex,
+                                meta: {
+                                    title: 'Candidatures',
+                                },
+                            }
+                        ]
                 }
             ],
         beforeEnter: (to, from, next) => {
