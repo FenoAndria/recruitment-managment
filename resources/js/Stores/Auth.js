@@ -9,6 +9,7 @@ const getters = {
 const mutations = {
     SET_USER_DATA: (state, userData) => state.userData = userData,
     SET_CANDIDATE: (state, candidate) => state.userData.candidate = candidate,
+    SET_COMPANY: (state, company) => state.userData.company = company,
 }
 const actions = {
     LOGIN: async ({ commit }, user) => {
