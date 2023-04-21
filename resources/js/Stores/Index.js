@@ -1,10 +1,10 @@
 import Vuex from 'vuex'
 import Auth from './Auth'
 import Company from './Company'
+import Candidate from './Candidate'
 import Job from './Job'
 
-import createPersistedState, { VuexPersistence } from 'vuex-persist'
-
+import { VuexPersistence } from 'vuex-persist'
 
 const vuexLocal = new VuexPersistence({
     key: 'vuex',
@@ -15,6 +15,7 @@ const store = new Vuex.Store({
     modules: {
         Auth,
         Company,
+        Candidate,
         Job
     },
     plugins: [vuexLocal.plugin]

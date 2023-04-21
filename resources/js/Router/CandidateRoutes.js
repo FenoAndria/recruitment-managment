@@ -1,7 +1,9 @@
 import store from '../Stores/Index'
-import CandidateProfileIndex from './../Views/Candidate/Profile/Index.vue'
-import CandidatureIndex from './../Views/Candidate/Candidature/Index.vue'
 import CandidateDashboard from './../Views/Candidate/CandidateDashboard.vue'
+import CandidateProfileIndex from './../Views/Candidate/Profile/Index.vue'
+import CandidateProfileEdit from './../Views/Candidate/Profile/Edit.vue'
+
+import CandidatureIndex from './../Views/Candidate/Candidature/Index.vue'
 
 const CandidateRoutes = [
     {
@@ -54,6 +56,7 @@ const CandidateRoutes = [
                         {
                             path: 'edit',
                             name: 'CandidateProfileEdit',
+                            component: CandidateProfileEdit,
                             meta: {
                                 title: 'Candidate Profile | Edit',
                             },
