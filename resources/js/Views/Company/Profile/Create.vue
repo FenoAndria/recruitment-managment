@@ -38,7 +38,7 @@
         <button class="btn">SAVE</button>
       </form>
     </div>
-  </CompanyLayout>
+  </CompanyLayout> 
 </template>
 <script>
 import { mapGetters } from "vuex";
@@ -81,8 +81,10 @@ export default {
       this.$store
         .dispatch("StoreCompany", companyData)
         .then((result) => {
+          this.$store.commit("SET_COMPANY", result.data.company);
+          location.reload()
           console.log(result.data.company);
-          this.$router.push({ name: "CompanyProfileIndex" });
+          // this.$router.push({ name: "CompanyProfileIndex" });
         })
         .catch((err) => {
           console.log(err.response);

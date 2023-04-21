@@ -25,6 +25,15 @@ class UserService
             /** @var \App\Models\User $user  */
             $user = Auth::user();
             $authData['token'] = $user->createToken('LaravelSanctumAuth')->plainTextToken;
+            $authData['email'] = $user->email;
+            $authData['role'] = $user->roles->name;
+            // TEMP
+            if ($user->roles->name == 'Candidate') {
+                $authData['candidate'] = $user->candidate;
+            }
+            if ($user->roles->name == 'Company') {
+                $authData['company'] = $user->company;
+            }
             return $authData;
         }
         return false;

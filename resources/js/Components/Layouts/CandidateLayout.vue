@@ -6,13 +6,13 @@
 <script>
 import UserLayout from "./../Layouts/UserLayout.vue";
 export default {
-  name: "CompanyLayout",
+  name: "CandidateLayout",
   data() {
     return {
       links: [
-        { tag: "Dashboard", name: "CompanyDashboard" },
-        { tag: "Profile", name: "CompanyProfileIndex" },
-        { tag: "My Jobs", name: "CompanyJobsIndex" },
+        { tag: "Dashboard", name: "CandidateDashboard" },
+        { tag: "Profile", name: "CandidateProfileIndex" },
+        { tag: "My candidatures", name: "CandidatureIndex" },
       ],
     }
   },

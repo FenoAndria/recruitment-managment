@@ -20,8 +20,8 @@ class CandidateUpdateRequest extends LayoutRequest
             'country' => 'string',
             'birth_date' => 'date',
             'phone' => 'string',
-            'resume' => 'mimes:pdf',
-            'photo' => 'mimes:jpg,bmp,png',
+            'resume' => 'nullable|mimes:pdf',
+            'photo' => 'nullable|mimes:jpg,bmp,png',
             'user_id' => 'exists:users,id',
         ];
     }

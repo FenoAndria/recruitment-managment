@@ -79,6 +79,7 @@ export default {
       loading: false,
       loadingSubmit: false,
       validationErrors: "",
+      brand:''
     };
   },
   components: {
@@ -106,13 +107,13 @@ export default {
         });
     },
     fileChanged(e) {
-      this.company.brand = e.target.files[0];
+      this.brand = e.target.files[0];
     },
     async updateCompany() {
       this.loadingSubmit = true;
       this.validationErrors = '';
       let companyData = new FormData();
-      companyData.append("brand", this.company.brand);
+      companyData.append("brand", this.brand);
       companyData.append("name", this.company.name);
       companyData.append("address", this.company.address);
       companyData.append("city", this.company.city);
@@ -120,11 +121,12 @@ export default {
       companyData.append("phone", this.company.phone);
       companyData.append("website", this.company.website);
       companyData.append("description", this.company.description);
+      console.log(companyData);
       this.$store
         .dispatch("UpdateCompany", companyData)
         .then((result) => {
           console.log(result.data.company);
-          this.$router.push({ name: "CompanyProfileIndex" });
+          // this.$router.push({ name: "CompanyProfileIndex" });
           this.loadingSubmit = false;
         })
         .catch((err) => {
