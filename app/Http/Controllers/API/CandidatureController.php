@@ -16,15 +16,6 @@ use Illuminate\Http\Request;
 class CandidatureController extends Controller
 {
 
-    public function forCompany(CandidatureService $candidatureService)
-    {
-        return new JsonResponse(
-            data: [
-                'candidatures' => JobResource::collection($candidatureService->getCandidaturesForCompany())
-            ]
-        );
-    }
-
     public function byCandidate(CandidatureService $candidatureService)
     {
         return new JsonResponse(
@@ -44,19 +35,7 @@ class CandidatureController extends Controller
         );
     }
 
-    public function updateCandidature(CandidatureUpdateRequest $request, CandidatureService $candidatureService, Candidature $candidature)
-    {
-        if ($request->user()->cannot('update', $candidature)) {
-            throw new CustomForbiddenException();
-        }
-        return new JsonResponse(
-            data: [
-                'message' => 'Candidature updated successfully',
-                'candidatures' => new CandidatureResource($candidatureService->updateCandidature($candidature, $request->status))
-            ]
-        );
-    }
-
+    
     /**
      * Display a listing of the resource.
      *

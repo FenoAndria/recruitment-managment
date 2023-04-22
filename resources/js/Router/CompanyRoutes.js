@@ -8,6 +8,8 @@ import CompanyJobCreate from './../Views/Company/Job/Create.vue'
 import CompanyJobEdit from './../Views/Company/Job/Edit.vue'
 import CompanyDashboard from './../Views/Company/CompanyDashboard.vue'
 
+import CandidaturesForCompanyShow from './../Views/Company/Candidature/Show.vue'
+
 import store from '../Stores/Index';
 
 const CompanyRoutes = [
@@ -112,8 +114,22 @@ const CompanyRoutes = [
                                 title: 'Create Company\'s Job '
                             }
                         },
+                        {
+                            path: 'candidatures/',
+                            name: 'CandidaturesForCompany',
+                            children: [
+                                {
+                                    path: ':candidature',
+                                    name: 'CandidaturesForCompanyShow',
+                                    component: CandidaturesForCompanyShow,
+                                    meta: {
+                                        title: 'Candidatures '
+                                    }
+                                }
+                            ]
+                        }
                     ],
-                }
+                },
             ],
         beforeEnter: (to, from, next) => {
             if (store.getters.USER_DATA.role != 'Company') {

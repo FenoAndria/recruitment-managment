@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CandidateController;
+use App\Http\Controllers\API\Candidature\CandidatureForCompanyController;
 use App\Http\Controllers\API\CandidatureController;
 use App\Http\Controllers\API\CompanyController;
 use App\Http\Controllers\API\CompanyJobController;
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 | Here is where you can register API routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
-|
+| 
 */
 
 Route::get('/', function () {
@@ -44,11 +45,12 @@ Route::middleware('auth:sanctum')->group(function () {
         /**
          * Get candidatures for company's job
          */
-        Route::get('candidature/for-company', [CandidatureController::class, 'forCompany'])->name('candidatureForCompany');
+        Route::get('candidature/for-company', [CandidatureForCompanyController::class, 'index'])->name('candidatureForCompanyIndex');
+        Route::get('candidature/for-company/{candidature}', [CandidatureForCompanyController::class, 'show'])->name('candidatureForCompanyShow');
         /**
          * Update candidature [pending,keeped,...]
          */
-        Route::put('candidature/{candidature}', [CandidatureController::class, 'updateCandidature'])->name('updateCandidature');
+        Route::put('candidature/{candidature}', [CandidatureForCompanyController::class, 'update'])->name('candidatureForCompanyUpdate');
     });
     /**
      * Job Resource

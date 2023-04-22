@@ -42,7 +42,9 @@
                 </h4>
                 <h4>
                   Deadline :
-                  <span v-if="job.deadline">{{ this.$dayjs(job.deadline).format("DD MMM YYYY") }}</span>
+                  <span v-if="job.deadline">{{
+                    this.$dayjs(job.deadline).format("DD MMM YYYY")
+                  }}</span>
                   <span class="badge badge-error text-white" v-else>Empty</span>
                 </h4>
               </div>
@@ -56,7 +58,8 @@
                   </Button>
                 </router-link>
                 <h4 class="text-sm text-gray-500">
-                  Published at : {{ this.$dayjs(job.published_at).format("DD MMM YYYY") }}
+                  Published at :
+                  {{ this.$dayjs(job.published_at).format("DD MMM YYYY") }}
                 </h4>
               </div>
             </div>
@@ -79,6 +82,7 @@
               <table class="table table-compact w-full text-center mt-2">
                 <thead>
                   <tr>
+                    <th></th>
                     <th>CANDIDATE</th>
                     <th>STATUS</th>
                     <th>DATE</th>
@@ -86,12 +90,25 @@
                 </thead>
                 <tbody>
                   <tr
-                    v-for="(
-                      candidature, candidatureIndex
-                    ) in job.candidatures"
+                    v-for="(candidature, candidatureIndex) in job.candidatures"
                     :key="candidatureIndex"
                   >
-                    <td>{{ candidature.candidate.first_name }} {{ candidature.candidate.last_name }}</td>
+                    <td style="width: 20px">
+                      <router-link
+                        :to="{
+                          name: 'CandidaturesForCompanyShow',
+                          params: { candidature: candidature.id },
+                        }"
+                      >
+                        <span class="badge badge-info text-white"
+                          ><i class="bi bi-pencil-square"></i
+                        ></span>
+                      </router-link>
+                    </td>
+                    <td>
+                      {{ candidature.candidate.first_name }}
+                      {{ candidature.candidate.last_name }}
+                    </td>
                     <td>
                       <span class="badge font-semibold">{{
                         candidature.status
