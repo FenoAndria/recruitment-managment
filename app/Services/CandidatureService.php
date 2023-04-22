@@ -55,8 +55,11 @@ class CandidatureService
     /**
      * Check candidature for candidates
      **/
-    private function candidatureExistsForCandidate()
+    public function candidatureExistsForCandidate(Job $job)
     {
-        //
+        return Candidature::where([
+            'job_id' => $job->id,
+            'candidate_id' => $this->user->candidate->id,
+        ])->first();
     }
 }

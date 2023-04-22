@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\JobRequest;
 use App\Http\Resources\JobResource;
 use App\Models\Job;
+use App\Services\CandidatureService;
 use App\Services\JobService;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -60,7 +61,7 @@ class JobController extends Controller
      * @param  Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, JobService $jobService, Job $job)
+    public function show(Request $request, CandidatureService $candidatureService, Job $job)
     {
         /**
          * Determine whether the user can view $job
@@ -70,7 +71,8 @@ class JobController extends Controller
         }
         return new JsonResponse(
             data: [
-                'job' => new JobResource($job)
+                'job' => new JobResource($job),
+                'candidature' =>($candidatureService->candidatureExistsForCandidate($job)),
             ],
         );
     }

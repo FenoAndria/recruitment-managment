@@ -25,6 +25,9 @@ const actions = {
     UpdateCandidature: ({ commit }, candidature) => {
         return API().put('candidature/' + candidature.id , candidature)
     },
+    StoreCandidature: ({ commit }, job) => {
+        return API().post('candidature/' + job.id , job)
+    },
 }
 export default {
     state,

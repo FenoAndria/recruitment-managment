@@ -36,9 +36,22 @@
               </div>
               <hr class="border border-green-500 mt-1" />
               <div class="mt-1">
-                <SubmitButton class="float-right btn-sm">
-                  <i class="bi bi-check-circle"></i> Apply
-                </SubmitButton>
+                <div class="float-right">
+                  <span
+                    v-if="this.candidatureExists"
+                    class="font-bold text-danger-500"
+                    ><i class="bi bi-check-circle"></i> Candidature
+                    sended!</span
+                  >
+                  <SubmitButton
+                    class="btn-sm"
+                    :loading="this.loadingSubmit"
+                    @click.prevent="submit"
+                    v-else
+                  >
+                    Apply
+                  </SubmitButton>
+                </div>
                 <h4 class="text-sm text-gray-500">
                   Published at :
                   {{ this.$dayjs(job.published_at).format("DD MMM YYYY") }}
@@ -62,6 +75,8 @@ export default {
   data() {
     return {
       loading: false,
+      loadingSubmit: false,
+      candidatureExists: false,
     };
   },
   components: {
@@ -79,10 +94,24 @@ export default {
         .dispatch("GetJob", this.$route.params.job)
         .then((result) => {
           this.$store.commit("SetJob", result.data.job);
+          this.candidatureExists = result.data.candidature;
           this.loading = false;
-          console.log(this.$store.getters.job);
         })
         .catch((err) => {
+          console.log(err);
+        });
+    },
+    submit() {
+      this.loadingSubmit = true;
+      this.$store
+        .dispatch("StoreCandidature", this.job)
+        .then((result) => {
+          this.$router.push({ name: "JobIndex" });
+          this.loadingSubmit = false;
+          console.log(result);
+        })
+        .catch((err) => {
+          this.loadingSubmit = false;
           console.log(err);
         });
     },

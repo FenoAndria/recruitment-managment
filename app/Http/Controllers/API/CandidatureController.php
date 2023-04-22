@@ -13,7 +13,7 @@ use App\Services\CandidatureService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class CandidatureController extends Controller
+class CandidatureController extends Controller 
 {
 
     public function byCandidate(CandidatureService $candidatureService)
