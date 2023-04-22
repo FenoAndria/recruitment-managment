@@ -24,9 +24,9 @@ class JobResource extends JsonResource
             'missions' => $this->missions,
             'profile_required' => $this->profile_required,
             'urgent' => $this->urgent,
-            'visibility' => $this->visibility,
+            // 'visibility' => $this->visibility,
             'company' => new CompanyResource($this->company),
-            'candidatures' =>($this->candidature),
+            // 'candidatures' =>($this->candidature),
         ];
     }
 }

@@ -55,4 +55,9 @@ class JobService
             })
             ->get();
     }
+
+    public function visibleJobs()
+    {
+        return Job::where('visibility', true)->get();
+    }
 }

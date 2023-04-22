@@ -24,7 +24,7 @@ class JobController extends Controller
         return new JsonResponse(
             data: [
                 'message' => 'Listing job',
-                'jobs' => JobResource::collection($jobService->listJob())
+                'jobs' => JobResource::collection($jobService->visibleJobs())
             ],
         );
     }

@@ -21,7 +21,7 @@
           <div class="x-form">
             <ValidationError :errors="validationErrors" column="password" />
             <label for="password" class="text-white">Password</label>
-            <input class="x-input" type="text" v-model="user.password" />
+            <input class="x-input" type="password" v-model="user.password" />
           </div>
           <SubmitButton
             :loading="this.loadingSubmit"

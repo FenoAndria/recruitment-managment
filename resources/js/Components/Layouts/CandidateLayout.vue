@@ -12,7 +12,8 @@ export default {
       links: [
         { tag: "Dashboard", name: "CandidateDashboard" },
         { tag: "Profile", name: "CandidateProfileIndex" },
-        { tag: "My candidatures", name: "CandidatureIndex" },
+        { tag: "Candidatures", name: "CandidatureIndex" },
+        { tag: "Jobs", name: "JobIndex" },
       ],
     }
   },
