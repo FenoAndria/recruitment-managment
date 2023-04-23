@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Models\Candidature;
 use App\Models\Job;
-use Illuminate\Support\Facades\DB;
 
 class CandidatureService
 {

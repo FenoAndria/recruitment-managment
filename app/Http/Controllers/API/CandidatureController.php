@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Events\CandidatureResponseEvent;
 use App\Exceptions\CustomForbiddenException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CandidatureUpdateRequest;
@@ -13,7 +14,7 @@ use App\Services\CandidatureService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class CandidatureController extends Controller 
+class CandidatureController extends Controller
 {
 
     public function byCandidate(CandidatureService $candidatureService)
@@ -27,15 +28,19 @@ class CandidatureController extends Controller
 
     public function storeCandidature(CandidatureService $candidatureService, Job $job)
     {
+        $candidature = $candidatureService->storeCandidature($job);
+
+        // event(new CandidatureResponseEvent($candidature));
+
         return new JsonResponse(
             data: [
                 'message' => 'Candidature sended successfully',
-                'candidatures' => new CandidatureResource($candidatureService->storeCandidature($job))
+                'candidatures' => new CandidatureResource($candidature)
             ]
         );
     }
 
-    
+
     /**
      * Display a listing of the resource.
      *
