@@ -15,4 +15,9 @@ class Interview extends Model
         'time',
         'details',
     ];
+
+    public function candidature()
+    {
+        return $this->belongsTo(Candidature::class);
+    }
 }

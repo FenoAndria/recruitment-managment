@@ -56,6 +56,10 @@ Route::middleware('auth:sanctum')->group(function () {
          * Store interview
          */
         Route::post('interview/{candidature}', [InterviewController::class, 'store'])->name('interview.store');
+        /**
+         * Get all interviews
+         */
+        Route::get('interview/company', [InterviewController::class, 'companyView'])->name('interview.company.index');
     });
     /**
      * Job Resource

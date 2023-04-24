@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Candidature;
 use App\Models\Interview;
+use Illuminate\Contracts\Database\Eloquent\Builder ;
 
 class InterviewService
 {
@@ -35,5 +36,12 @@ class InterviewService
     public function interviewExists(Candidature $candidature)
     {
         return Interview::where('candidature_id', $candidature->id)->first();
+    }
+
+    public function companyView()
+    {
+        return Interview::whereHas('candidature.job', function (Builder $query) {
+            $query->where('company_id', '=', $this->user->company->id);
+        })->get();
     }
 }

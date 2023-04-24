@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class InterviewController extends Controller
 {
-    
+
     public function store(InterviewRequest $request, InterviewService $interviewService, Candidature $candidature)
     {
         if ($request->user()->cannot('storeInterview', $candidature)) {
@@ -36,5 +36,15 @@ class InterviewController extends Controller
                 status: 201
             );
         }
+    }
+
+    public function companyView(InterviewService $interviewService)
+    {
+        return new JsonResponse(
+            data: [
+                'message' => 'Interviews',
+                'interviews' => $interviewService->companyView()
+            ],
+        );
     }
 }
