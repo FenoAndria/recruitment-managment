@@ -6,6 +6,7 @@ use App\Http\Controllers\API\Candidature\CandidatureForCompanyController;
 use App\Http\Controllers\API\CandidatureController;
 use App\Http\Controllers\API\CompanyController;
 use App\Http\Controllers\API\CompanyJobController;
+use App\Http\Controllers\API\InterviewController;
 use App\Http\Controllers\API\JobController;
 use Illuminate\Support\Facades\Route;
 
@@ -51,6 +52,10 @@ Route::middleware('auth:sanctum')->group(function () {
          * Update candidature [pending,keeped,...]
          */
         Route::put('candidature/{candidature}', [CandidatureForCompanyController::class, 'update'])->name('candidatureForCompanyUpdate');
+        /**
+         * Store interview
+         */
+        Route::post('interview/{candidature}', [InterviewController::class, 'store'])->name('interview.store');
     });
     /**
      * Job Resource
