@@ -57,7 +57,7 @@ Route::middleware('auth:sanctum')->group(function () {
          */
         Route::post('interview/{candidature}', [InterviewController::class, 'store'])->name('interview.store');
         /**
-         * Get all interviews
+         * Get all interviews [company]
          */
         Route::get('interview/company', [InterviewController::class, 'companyView'])->name('interview.company.index');
     });
@@ -81,6 +81,10 @@ Route::middleware('auth:sanctum')->group(function () {
          * Store candidatures
          */
         Route::post('candidature/{job}', [CandidatureController::class, 'storeCandidature'])->name('storeCandidature');
+         /**
+         * Get all interviews [candidate]
+         */
+        Route::get('interview/candidate', [InterviewController::class, 'candidateView'])->name('interview.candidate.index');
     });
 });
 

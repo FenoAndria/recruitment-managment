@@ -47,4 +47,14 @@ class InterviewController extends Controller
             ],
         );
     }
+
+    public function candidateView(InterviewService $interviewService)
+    {
+        return new JsonResponse(
+            data: [
+                'message' => 'Interviews',
+                'interviews' => $interviewService->candidateView()
+            ],
+        );
+    }
 }

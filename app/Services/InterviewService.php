@@ -44,4 +44,11 @@ class InterviewService
             $query->where('company_id', '=', $this->user->company->id);
         })->get();
     }
+
+    public function candidateView()
+    {
+        return Interview::whereHas('candidature', function (Builder $query) {
+            $query->where('candidate_id', '=', $this->user->candidate->id);
+        })->get();
+    }
 }
