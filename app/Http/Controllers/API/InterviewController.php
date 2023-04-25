@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Exceptions\CustomForbiddenException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InterviewRequest;
+use App\Http\Resources\InterviewResource;
 use App\Models\Candidature;
 use App\Services\InterviewService;
 use Illuminate\Http\JsonResponse;
@@ -43,7 +44,7 @@ class InterviewController extends Controller
         return new JsonResponse(
             data: [
                 'message' => 'Interviews',
-                'interviews' => $interviewService->companyView()
+                'interviews' => InterviewResource::collection($interviewService->companyView())
             ],
         );
     }
@@ -53,7 +54,7 @@ class InterviewController extends Controller
         return new JsonResponse(
             data: [
                 'message' => 'Interviews',
-                'interviews' => $interviewService->candidateView()
+                'interviews' => InterviewResource::collection($interviewService->candidateView())
             ],
         );
     }

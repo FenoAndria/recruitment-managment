@@ -14,8 +14,9 @@ export default {
         { tag: "Profile", name: "CandidateProfileIndex" },
         { tag: "Candidatures", name: "CandidatureIndex" },
         { tag: "Jobs", name: "JobIndex" },
+        { tag: "Interviews", name: "InterviewsCandidateIndex" },
       ],
-    }
+    };
   },
   components: {
     UserLayout,

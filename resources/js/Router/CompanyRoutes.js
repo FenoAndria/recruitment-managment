@@ -10,6 +10,8 @@ import CompanyDashboard from './../Views/Company/CompanyDashboard.vue'
 
 import CandidaturesForCompanyShow from './../Views/Company/Candidature/Show.vue'
 
+import InterviewsCompanyIndex from './../Views/Company/Interview/Index.vue'
+
 import store from '../Stores/Index';
 
 const CompanyRoutes = [
@@ -130,6 +132,20 @@ const CompanyRoutes = [
                         }
                     ],
                 },
+                {
+                    path: 'interview/',
+                    name: 'CompanyInterview',
+                    children: [
+                        {
+                            path: '',
+                            name: 'InterviewsCompanyIndex',
+                            component: InterviewsCompanyIndex,
+                            meta: {
+                                title: 'All interviews'
+                            }
+                        }
+                    ]
+                }
             ],
         beforeEnter: (to, from, next) => {
             if (store.getters.USER_DATA.role != 'Company') {

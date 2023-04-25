@@ -6,6 +6,8 @@ import CandidateProfileCreate from './../Views/Candidate/Profile/Create.vue'
 
 import CandidatureIndex from './../Views/Candidate/Candidature/Index.vue'
 
+import InterviewsCandidateIndex from './../Views/Candidate/Interview/Index.vue'
+
 const CandidateRoutes = [
     {
         path: '/candidate/',
@@ -86,6 +88,20 @@ const CandidateRoutes = [
                                 },
                             }
                         ]
+                },
+                {
+                    path: 'interview/',
+                    name: 'CandidateInterview',
+                    children: [
+                        {
+                            path: '',
+                            name: 'InterviewsCandidateIndex',
+                            component: InterviewsCandidateIndex,
+                            meta: {
+                                title: 'All interviews'
+                            }
+                        }
+                    ]
                 }
             ],
         beforeEnter: (to, from, next) => {
