@@ -33,6 +33,7 @@ export default {
         .dispatch("LOGOUT")
         .then(() => {
           localStorage.setItem("userToken", "");
+          localStorage.setItem("vuex", "");
           location.reload();
         })
         .catch((err) => {
