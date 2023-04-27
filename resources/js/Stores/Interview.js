@@ -19,7 +19,12 @@ const actions = {
     GetCandidateInterviews: async ({ commit }) => {
         return await API().get('interview/candidate')
     },
-    
+    CompanyShowInterview: async ({ commit }, candidature) => {
+        return await API().get('interview/company/' + candidature)
+    },
+    StoreInterview: async ({ commit }, payload) => {
+        return await API().post('interview/' + payload.candidature.id, payload.interview)
+    },
 }
 export default {
     state,

@@ -38,6 +38,11 @@ class InterviewService
         return Interview::where('candidature_id', $candidature->id)->first();
     }
 
+    public function companyShow(Candidature $candidature)
+    {
+       return $candidature->interview;
+    }
+
     public function companyView()
     {
         return Interview::whereHas('candidature.job', function (Builder $query) {

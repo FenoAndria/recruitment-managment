@@ -17,7 +17,7 @@ class InterviewRequest extends LayoutRequest
     {
         return [
             'date' => 'required|date',
-            'time' => 'required|date_format:H:i:s',
+            'time' => 'required|date_format:H:i',
             'details' => 'nullable',
         ];
     }

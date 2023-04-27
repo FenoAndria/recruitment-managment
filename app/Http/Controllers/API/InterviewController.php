@@ -39,6 +39,16 @@ class InterviewController extends Controller
         }
     }
 
+    public function companyShow(InterviewService $interviewService, Candidature $candidature)
+    {
+        return new JsonResponse(
+            data: [
+                'message' => 'Show Interview',
+                'interview' => new InterviewResource($interviewService->companyShow($candidature))
+            ],
+        );
+    }
+
     public function companyView(InterviewService $interviewService)
     {
         return new JsonResponse(

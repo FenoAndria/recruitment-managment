@@ -11,18 +11,33 @@
           <p class="text-lg">
             Date : {{ this.$dayjs(candidature.date).format("DD MMM YYYY") }}
           </p>
-          <div class="flex space-x-2 justify-center">
+          <p class="text-lg">
+            Status :
+            <span class="badge badge-secondary">{{ candidature.status }}</span>
+          </p>
+
+          <div
+            class="flex space-x-2 justify-center"
+            v-if="candidature.status == 'pending'"
+          >
             <label class="btn btn-sm btn-primary" for="interview"
               >Interview</label
             >
             <label class="btn btn-sm btn-success" for="keeped">Keeped</label>
             <label class="btn btn-sm btn-error" for="rejected">Rejected</label>
+            <InterviewModal :candidature="candidature" />
+            <CandidatureKeepedModal :candidature="candidature" />
+            <CandidatureRejectedModal :candidature="candidature" />
           </div>
-          
-          <InterviewModal />
-          <CandidatureKeepedModal />
-          <CandidatureRejectedModal />
-          
+          <div
+            class=""
+            v-if="candidature.status == 'interview' && candidature.interview"
+          >
+            <h4 class="text-lg font-bold">Interview</h4>
+            <p>Date : {{ candidature.interview.date }}</p>
+            <p>Time : {{ candidature.interview.time }}</p>
+            <p>Details : {{ candidature.interview.details }}</p>
+          </div>
         </div>
       </div>
     </Card>
@@ -60,7 +75,7 @@ export default {
     Modal,
     CandidatureKeepedModal,
     CandidatureRejectedModal,
-    InterviewModal
+    InterviewModal,
   },
   computed: {
     ...mapGetters(["candidature"]),
@@ -76,7 +91,7 @@ export default {
         .then((result) => {
           this.$store.commit("setCandidature", result.data.candidature);
           this.loading = false;
-          console.log(result);
+          // console.log(result.data);
         })
         .catch((err) => {
           this.loading = false;

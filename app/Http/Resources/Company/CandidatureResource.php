@@ -22,6 +22,7 @@ class CandidatureResource extends JsonResource
             'candidate' => new CandidateResource($this->candidate),
             'status' => $this->status,
             'date' => $this->created_at,
+            'interview' => $this->interview,
         ];
     }
 }

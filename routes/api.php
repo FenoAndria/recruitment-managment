@@ -57,6 +57,10 @@ Route::middleware('auth:sanctum')->group(function () {
          */
         Route::post('interview/{candidature}', [InterviewController::class, 'store'])->name('interview.store');
         /**
+         * Show interview
+         */
+        Route::get('interview/company/{candidature}', [InterviewController::class, 'companyShow'])->name('interview.companyShow');
+        /**
          * Get all interviews [company]
          */
         Route::get('interview/company', [InterviewController::class, 'companyView'])->name('interview.company.index');
