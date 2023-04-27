@@ -1,9 +1,9 @@
 <template>
   <CandidateLayout>
-    <div class="flex items-center justify-center">
+    <div class="" v-if="loading"><Loader /></div>
+    <div v-else class="flex items-center justify-center">
       <Card class="w-3/4 py-16">
-        <div class="" v-if="loading">Loading profile...</div>
-        <div class="" v-else>
+        <div class="">
           <div
             class="flex flex-wrap items-center justify-center"
             v-if="candidate"
@@ -23,7 +23,7 @@
                 <p><i class="bi bi-phone"></i> {{ candidate.phone }}</p>
                 <p>
                   <i class="bi bi-calendar-heart"></i>
-                  {{ this.$dayjs(candidate.birth_date).format('DD MMM YYYY') }}
+                  {{ this.$dayjs(candidate.birth_date).format("DD MMM YYYY") }}
                 </p>
                 <p>
                   <i class="bi bi-list-nested"></i>
@@ -83,6 +83,7 @@
 import { mapGetters } from "vuex";
 import CandidateLayout from "./../../../Components/Layouts/CandidateLayout.vue";
 import Card from "./../../../Components/Layouts/Card.vue";
+import Loader from "./../../../Components/Layouts/Loader.vue";
 export default {
   name: "CandidateProfileIndex",
   data() {
@@ -93,6 +94,7 @@ export default {
   components: {
     CandidateLayout,
     Card,
+    Loader,
   },
   computed: {
     ...mapGetters(["candidate"]),

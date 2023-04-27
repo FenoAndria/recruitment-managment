@@ -1,6 +1,7 @@
 <template>
   <CompanyLayout>
-    <div class="flex items-center justify-center">
+    <div class="" v-if="loading"><Loader /></div>
+    <div class="flex items-center justify-center" v-else>
       <Card class="w-3/4 py-16">
         <div class="" v-if="loading">Loading profile...</div>
         <div class="" v-else>
@@ -55,6 +56,7 @@
 import CompanyLayout from "./../../../Components/Layouts/CompanyLayout.vue";
 import Card from "./../../../Components/Layouts/Card.vue";
 import Button from "./../../../Components/Layouts/Button.vue";
+import Loader from "./../../../Components/Layouts/Loader.vue";
 import { mapGetters } from "vuex";
 export default {
   name: "CompanyProfile",
@@ -67,6 +69,7 @@ export default {
     CompanyLayout,
     Card,
     Button,
+    Loader
   },
   computed: {
     ...mapGetters(["company"]),

@@ -1,6 +1,7 @@
 <template>
   <CompanyLayout>
-    <Card>
+    <div class="" v-if="loading"><Loader /></div>
+    <Card v-else>
       <div v-if="loading">LOADING INTERVIEWS...</div>
       <div v-else>
         <div v-if="CompanyInterviews">
@@ -49,6 +50,7 @@
 <script>
 import CompanyLayout from "./../../../Components/Layouts/CompanyLayout.vue";
 import Card from "./../../../Components/Layouts/Card.vue";
+import Loader from "./../../../Components/Layouts/Loader.vue";
 import { mapGetters } from "vuex";
 
 export default {
@@ -61,6 +63,7 @@ export default {
   components: {
     CompanyLayout,
     Card,
+    Loader
   },
   computed: {
     ...mapGetters(["CompanyInterviews"]),

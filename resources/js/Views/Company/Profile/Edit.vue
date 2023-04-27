@@ -1,6 +1,7 @@
 <template>
   <CompanyLayout>
-    <div class="flex items-center justify-center">
+    <div class="" v-if="loading"><Loader /></div>
+    <div class="flex items-center justify-center" v-else>
       <Card class="w-3/4">
         <div class="" v-if="loading">Loading profile...</div>
         <div class="" v-else>
@@ -72,6 +73,7 @@ import CompanyLayout from "./../../../Components/Layouts/CompanyLayout.vue";
 import Card from "./../../../Components/Layouts/Card.vue";
 import SubmitButton from "./../../../Components/Layouts/SubmitButton.vue";
 import ValidationError from "./../../../Components/Layouts/ValidationError.vue";
+import Loader from "./../../../Components/Layouts/Loader.vue";
 export default {
   name: "CompanyProfileEdit",
   data() {
@@ -87,6 +89,7 @@ export default {
     Card,
     SubmitButton,
     ValidationError,
+    Loader
   },
   computed: {
     ...mapGetters(["company"]),
@@ -126,7 +129,7 @@ export default {
         .dispatch("UpdateCompany", companyData)
         .then((result) => {
           console.log(result.data.company);
-          // this.$router.push({ name: "CompanyProfileIndex" });
+          this.$router.push({ name: "CompanyProfileIndex" });
           this.loadingSubmit = false;
         })
         .catch((err) => {

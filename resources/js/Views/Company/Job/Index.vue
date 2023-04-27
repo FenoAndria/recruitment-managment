@@ -7,7 +7,7 @@
         </button>
       </router-link>
     </div>
-    <div v-if="loading">LOADING JOBS...</div>
+    <div class="" v-if="loading"><Loader /></div>
     <div v-else>
       <div class="flex flex-wrap -mx-2" v-if="jobs">
         <div
@@ -64,6 +64,7 @@
 import { mapGetters } from "vuex";
 import CompanyLayout from "./../../../Components/Layouts/CompanyLayout.vue";
 import Card from "./../../../Components/Layouts/Card.vue";
+import Loader from "./../../../Components/Layouts/Loader.vue";
 export default {
   name: "CompanyJobsIndex",
   data() {
@@ -74,6 +75,7 @@ export default {
   components: {
     CompanyLayout,
     Card,
+    Loader
   },
   computed: {
     ...mapGetters(["jobs"]),

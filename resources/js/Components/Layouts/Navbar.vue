@@ -15,8 +15,43 @@
       <span id="documentTitle"></span>
     </div>
     <div class="space-x-2">
-      <span class=""><i class="bi bi-person-circle"></i> {{ USER_DATA.email }}</span>
-      <span class="btn btn-sm btn-warning" @click="logout">Logout</span>
+      <div class="dropdown dropdown-end">
+        <img
+          tabindex="0"
+          :src="'http://localhost:8000' + user.photo"
+          alt="profile-image"
+          class="
+            w-8
+            h-8
+            object-cover
+            rounded-full
+            shadow-lg
+            border border-white
+            cursor-pointer
+          "
+        />
+        <div
+          tabindex="0"
+          class="
+            dropdown-content
+            menu
+            p-2
+            shadow
+            bg-base-100
+            rounded-lg
+            w-52
+            text-green-500 text-center
+          "
+        >
+          <span>
+            <a>{{ this.user.name }}</a>
+          </span>
+          <hr class="border my-1" />
+          <span class="btn btn-sm btn-default" @click="logout"
+            ><i class="bi bi-power"></i>Logout</span
+          >
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -24,6 +59,14 @@
 import { mapGetters } from "vuex";
 export default {
   name: "Navbar",
+  data() {
+    return {
+      user: {
+        name: "",
+        photo: "",
+      },
+    };
+  },
   computed: {
     ...mapGetters(["USER_DATA"]),
   },
@@ -43,6 +86,14 @@ export default {
   },
   mounted() {
     document.getElementById("documentTitle").innerHTML = document.title;
+    this.user.name = this.USER_DATA.company
+      ? this.USER_DATA.company.name
+      : this.USER_DATA.candidate.first_name +
+        "" +
+        this.USER_DATA.candidate.last_name;
+    this.user.photo = this.USER_DATA.company
+      ? this.USER_DATA.company.brand
+      : this.USER_DATA.candidate.photo;
   },
 };
 </script>

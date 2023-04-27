@@ -1,9 +1,9 @@
 <template>
   <CandidateLayout>
-    <div class="flex items-center justify-center">
+    <div class="" v-if="loading"><Loader /></div>
+    <div class="flex items-center justify-center" v-else>
       <Card class="w-3/4">
-        <div v-if="loading">LOADING JOB...</div>
-        <div v-else>
+        <div>
           <div class="" v-if="job">
             <div>
               <h3 class="jobTitle">{{ job.title }}</h3>
@@ -70,6 +70,7 @@ import { mapGetters } from "vuex";
 import CandidateLayout from "./../../Components/Layouts/CandidateLayout.vue";
 import Card from "./../../Components/Layouts/Card.vue";
 import SubmitButton from "./../../Components/Layouts/SubmitButton.vue";
+import Loader from "./../../Components/Layouts/Loader.vue";
 export default {
   name: "JobShow",
   data() {
@@ -83,6 +84,7 @@ export default {
     CandidateLayout,
     Card,
     SubmitButton,
+    Loader
   },
   computed: {
     ...mapGetters(["job"]),

@@ -1,8 +1,8 @@
 <template>
   <CandidateLayout>
-    <Card>
-      <div v-if="loading">LOADING INTERVIEWS...</div>
-      <div v-else>
+    <div class="" v-if="loading"><Loader /></div>
+    <Card v-else>
+      <div >
         <div v-if="CandidateInterviews">
           <table class="table table-compact w-full text-center">
             <thead>
@@ -49,6 +49,7 @@
 <script>
 import CandidateLayout from "./../../../Components/Layouts/CandidateLayout.vue";
 import Card from "./../../../Components/Layouts/Card.vue";
+import Loader from "./../../../Components/Layouts/Loader.vue";
 import { mapGetters } from "vuex";
 
 export default {
@@ -61,6 +62,7 @@ export default {
   components: {
     CandidateLayout,
     Card,
+    Loader
   },
   computed: {
     ...mapGetters(["CandidateInterviews"]),

@@ -1,6 +1,6 @@
 <template>
   <CandidateLayout>
-    <div v-if="loading">LOADING JOBS...</div>
+    <div class="" v-if="loading"><Loader /></div>
     <div v-else>
       <div class="flex flex-wrap -mx-2" v-if="jobs">
         <div class="w-1/3 px-2 mb-2" v-for="(job, jobIndex) in jobs" :key="jobIndex">
@@ -40,6 +40,7 @@
 import { mapGetters } from "vuex";
 import CandidateLayout from "./../../Components/Layouts/CandidateLayout.vue";
 import Card from "./../../Components/Layouts/Card.vue";
+import Loader from "./../../Components/Layouts/Loader.vue";
 export default {
   name: "JobIndex",
   data() {
@@ -50,6 +51,7 @@ export default {
   components: {
     CandidateLayout,
     Card,
+    Loader
   },
   computed: {
     ...mapGetters(["jobs"]),

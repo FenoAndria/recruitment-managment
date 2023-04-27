@@ -1,8 +1,8 @@
 <template>
   <CandidateLayout>
-    <Card>
-      <div class="" v-if="loading">LOADING CANDIDATURES...</div>
-      <div v-else>
+    <div class="" v-if="loading"><Loader /></div>
+    <Card v-else>
+      <div >
         <div class="overflow-x-auto" v-if="candidaturesByCandidate">
           <table class="table table-compact w-full text-center">
             <thead>
@@ -36,6 +36,7 @@
 import { mapGetters } from "vuex";
 import CandidateLayout from "./../../../Components/Layouts/CandidateLayout.vue";
 import Card from "./../../../Components/Layouts/Card.vue";
+import Loader from "./../../../Components/Layouts/Loader.vue";
 export default {
   name: "CandidatureIndex",
   data() {
@@ -46,6 +47,7 @@ export default {
   components: {
     CandidateLayout,
     Card,
+    Loader
   },
   computed: {
     ...mapGetters(["candidaturesByCandidate"]),

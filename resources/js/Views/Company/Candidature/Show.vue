@@ -1,6 +1,7 @@
 <template>
   <CompanyLayout>
-    <Card>
+    <div class="" v-if="loading"><Loader /></div>
+    <Card v-else>
       <div v-if="loading">LOADING CANDIDATURE...</div>
       <div v-else>
         <div v-if="candidature">
@@ -56,6 +57,7 @@ import Modal from "./../../../Components/Layouts/Modal.vue";
 import CandidatureKeepedModal from "./../../../Components/Modal/CandidatureKeepedModal.vue";
 import CandidatureRejectedModal from "./../../../Components/Modal/CandidatureRejectedModal.vue";
 import InterviewModal from "./../../../Components/Modal/InterviewModal.vue";
+import Loader from "./../../../Components/Layouts/Loader.vue";
 import { mapGetters } from "vuex";
 
 export default {
@@ -80,6 +82,7 @@ export default {
     CandidatureKeepedModal,
     CandidatureRejectedModal,
     InterviewModal,
+    Loader
   },
   computed: {
     ...mapGetters(["candidature"]),
