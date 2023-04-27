@@ -11,28 +11,33 @@
           <p class="text-lg">
             Date : {{ this.$dayjs(candidature.date).format("DD MMM YYYY") }}
           </p>
-          <!-- <p class="text-lg">Status : {{ candidature.status }}</p> -->
-          <form @submit.prevent="submit">
-            <div class="space-y-4">
-              <div class="form-control">
-                <select
-                  v-model="candidature.status"
-                  class="select select-bordered select-sm select-success"
-                >
-                  <option value="pending">Pending</option>
-                  <option value="interview">Interview</option>
-                  <option value="keeped">Keeped</option>
-                  <option value="rejected">Rejected</option>
-                </select>
-              </div>
-              <SubmitButton
-                class="btn-sm btn-block"
-                :loading="this.loadingSubmit"
-              >
-                Update</SubmitButton
-              >
-            </div>
-          </form>
+          <p class="text-lg">
+            Status :
+            <span class="badge badge-secondary">{{ candidature.status }}</span>
+          </p>
+
+          <div
+            class="flex space-x-2 justify-center"
+            v-if="candidature.status == 'pending'"
+          >
+            <label class="btn btn-sm btn-primary" for="interview"
+              >Interview</label
+            >
+            <label class="btn btn-sm btn-success" for="keeped">Keeped</label>
+            <label class="btn btn-sm btn-error" for="rejected">Rejected</label>
+            <InterviewModal :candidature="candidature" />
+            <CandidatureKeepedModal :candidature="candidature" />
+            <CandidatureRejectedModal :candidature="candidature" />
+          </div>
+          <div
+            class=""
+            v-if="candidature.status == 'interview' && candidature.interview"
+          >
+            <h4 class="text-lg font-bold">Interview</h4>
+            <p>Date : {{ candidature.interview.date }}</p>
+            <p>Time : {{ candidature.interview.time }}</p>
+            <p>Details : {{ candidature.interview.details }}</p>
+          </div>
         </div>
       </div>
     </Card>
@@ -42,6 +47,11 @@
 import CompanyLayout from "./../../../Components/Layouts/CompanyLayout.vue";
 import Card from "./../../../Components/Layouts/Card.vue";
 import SubmitButton from "./../../../Components/Layouts/SubmitButton.vue";
+import Button from "./../../../Components/Layouts/Button.vue";
+import Modal from "./../../../Components/Layouts/Modal.vue";
+import CandidatureKeepedModal from "./../../../Components/Modal/CandidatureKeepedModal.vue";
+import CandidatureRejectedModal from "./../../../Components/Modal/CandidatureRejectedModal.vue";
+import InterviewModal from "./../../../Components/Modal/InterviewModal.vue";
 import { mapGetters } from "vuex";
 
 export default {
@@ -51,12 +61,21 @@ export default {
       loading: false,
       loadingSubmit: false,
       status: "",
+      modal: {
+        content: "",
+        status: "",
+      },
     };
   },
   components: {
     CompanyLayout,
     Card,
     SubmitButton,
+    Button,
+    Modal,
+    CandidatureKeepedModal,
+    CandidatureRejectedModal,
+    InterviewModal,
   },
   computed: {
     ...mapGetters(["candidature"]),
@@ -72,7 +91,7 @@ export default {
         .then((result) => {
           this.$store.commit("setCandidature", result.data.candidature);
           this.loading = false;
-          console.log(result);
+          // console.log(result.data);
         })
         .catch((err) => {
           this.loading = false;

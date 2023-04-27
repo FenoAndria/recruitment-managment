@@ -6,6 +6,7 @@ use App\Http\Controllers\API\Candidature\CandidatureForCompanyController;
 use App\Http\Controllers\API\CandidatureController;
 use App\Http\Controllers\API\CompanyController;
 use App\Http\Controllers\API\CompanyJobController;
+use App\Http\Controllers\API\InterviewController;
 use App\Http\Controllers\API\JobController;
 use Illuminate\Support\Facades\Route;
 
@@ -51,6 +52,18 @@ Route::middleware('auth:sanctum')->group(function () {
          * Update candidature [pending,keeped,...]
          */
         Route::put('candidature/{candidature}', [CandidatureForCompanyController::class, 'update'])->name('candidatureForCompanyUpdate');
+        /**
+         * Store interview
+         */
+        Route::post('interview/{candidature}', [InterviewController::class, 'store'])->name('interview.store');
+        /**
+         * Show interview
+         */
+        Route::get('interview/company/{candidature}', [InterviewController::class, 'companyShow'])->name('interview.companyShow');
+        /**
+         * Get all interviews [company]
+         */
+        Route::get('interview/company', [InterviewController::class, 'companyView'])->name('interview.company.index');
     });
     /**
      * Job Resource
@@ -72,6 +85,10 @@ Route::middleware('auth:sanctum')->group(function () {
          * Store candidatures
          */
         Route::post('candidature/{job}', [CandidatureController::class, 'storeCandidature'])->name('storeCandidature');
+         /**
+         * Get all interviews [candidate]
+         */
+        Route::get('interview/candidate', [InterviewController::class, 'candidateView'])->name('interview.candidate.index');
     });
 });
 

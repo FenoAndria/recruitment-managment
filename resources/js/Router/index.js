@@ -12,6 +12,10 @@ const router = createRouter({
     history: createWebHistory(),
     routes: [
         {
+            path: '/',
+            redirect: { name: 'Login' }
+        },
+        {
             path: '/:pathMatch(.*)*',
             name: 'NotFound',
             component: NotFound,

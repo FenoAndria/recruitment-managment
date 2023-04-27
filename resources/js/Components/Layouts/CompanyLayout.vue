@@ -13,6 +13,7 @@ export default {
         { tag: "Dashboard", name: "CompanyDashboard" },
         { tag: "Profile", name: "CompanyProfileIndex" },
         { tag: "My Jobs", name: "CompanyJobsIndex" },
+        { tag: "Interviews", name: "InterviewsCompanyIndex" },
       ],
     }
   },

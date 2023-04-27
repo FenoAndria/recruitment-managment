@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Candidature;
+use App\Models\Interview;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class CandidaturePolicy
+class InterviewPolicy
 {
     use HandlesAuthorization;
 
@@ -25,19 +25,11 @@ class CandidaturePolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Candidature  $candidature
+     * @param  \App\Models\Interview  $interview
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Candidature $candidature)
+    public function view(User $user, Interview $interview)
     {
-        //
-    }
-    /**
-     * Determine if user can store Interview for $candidature
-     */
-    public function storeInterview(User $user, Candidature $candidature)
-    {
-        return $user->company == $candidature->job->company;
         //
     }
 
@@ -56,22 +48,22 @@ class CandidaturePolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Candidature  $candidature
+     * @param  \App\Models\Interview  $interview
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Candidature $candidature)
+    public function update(User $user, Interview $interview)
     {
-        return $user->company == $candidature->job->company;
+        //
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Candidature  $candidature
+     * @param  \App\Models\Interview  $interview
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Candidature $candidature)
+    public function delete(User $user, Interview $interview)
     {
         //
     }
@@ -80,10 +72,10 @@ class CandidaturePolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Candidature  $candidature
+     * @param  \App\Models\Interview  $interview
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Candidature $candidature)
+    public function restore(User $user, Interview $interview)
     {
         //
     }
@@ -92,10 +84,10 @@ class CandidaturePolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Candidature  $candidature
+     * @param  \App\Models\Interview  $interview
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Candidature $candidature)
+    public function forceDelete(User $user, Interview $interview)
     {
         //
     }
