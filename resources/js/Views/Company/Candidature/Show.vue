@@ -8,6 +8,10 @@
             Candidate : {{ candidature.candidate.first_name }}
             {{ candidature.candidate.last_name }}
           </p>
+          <p class="badge">
+            <i class="bi bi-file-person"></i>
+            <a :href="candidature.candidate.resume">Resume</a>
+          </p>
           <p class="text-lg">
             Date : {{ this.$dayjs(candidature.date).format("DD MMM YYYY") }}
           </p>

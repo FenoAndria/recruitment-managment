@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('candidates', function (Blueprint $table) {
-            $table->string('photo')->nullable();
+            $table->string('photo')->nullable()->default('/assets/Avatar.png');
             //
         });
     }

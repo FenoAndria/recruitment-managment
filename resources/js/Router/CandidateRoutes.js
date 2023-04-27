@@ -111,6 +111,10 @@ const CandidateRoutes = [
                 next()
             }
         }
+    },
+    {
+        path: '/:resume',
+        name: 'CandidateResume',
     }
 ]
 export default CandidateRoutes

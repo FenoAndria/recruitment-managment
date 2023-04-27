@@ -23,7 +23,7 @@
                 <p><i class="bi bi-phone"></i> {{ candidate.phone }}</p>
                 <p>
                   <i class="bi bi-calendar-heart"></i>
-                  {{ candidate.birth_date }}
+                  {{ this.$dayjs(candidate.birth_date).format('DD MMM YYYY') }}
                 </p>
                 <p>
                   <i class="bi bi-list-nested"></i>
@@ -35,6 +35,10 @@
                     EMPTY</span
                   >
                 </p>
+                <p class="badge">
+                  <i class="bi bi-file-person"></i>
+                  <a :href="candidate.resume">Resume</a>
+                </p>
               </div>
               <div class="float-right">
                 <router-link
@@ -44,7 +48,8 @@
                     px-2
                     text-green-500
                     font-bold
-                    hover:shadow                    hover:bg-green-500
+                    hover:shadow
+                    hover:bg-green-500
                     hover:text-white
                     transition-all
                     rounded

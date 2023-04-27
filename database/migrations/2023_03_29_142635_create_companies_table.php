@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('website')->nullable();
             $table->text('description')->nullable();
-            $table->string('brand')->nullable();
+            $table->string('brand')->nullable()->default('/assets/Avatar.png');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
