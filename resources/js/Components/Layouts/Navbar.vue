@@ -14,8 +14,17 @@
     <div class="headTitle">
       <span id="documentTitle"></span>
     </div>
-    <div class="space-x-2">
-      <div class="dropdown dropdown-end">
+    <div class="">
+      <div class="space-x-2" v-if="noProfile">
+        <span
+          ><i class="bi bi-person-circle"></i>
+          {{ this.$store.getters.USER_DATA.email }}</span
+        >
+        <span class="btn btn-sm btn-default" @click="logout"
+          ><i class="bi bi-power"></i>Logout</span
+        >
+      </div>
+      <div class="dropdown dropdown-end" v-else>
         <img
           tabindex="0"
           :src="'http://localhost:8000' + user.photo"
@@ -59,6 +68,7 @@
 import { mapGetters } from "vuex";
 export default {
   name: "Navbar",
+  props: ["noProfile"],
   data() {
     return {
       user: {

@@ -35,9 +35,13 @@
                     EMPTY</span
                   >
                 </p>
-                <p class="badge">
+                <p class="badge" v-if="candidate.resume">
                   <i class="bi bi-file-person"></i>
                   <a :href="candidate.resume">Resume</a>
+                </p>
+                <p class="badge badge-error text-white font-semibold" v-else>
+                  <i class="bi bi-file-person"></i>
+                    Resume empty!
                 </p>
               </div>
               <div class="float-right">

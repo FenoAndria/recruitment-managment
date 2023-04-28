@@ -76,6 +76,6 @@ class CompanyService
      */
     public function getJobs()
     {
-        return $this->user->company->jobs;
+        return $this->user->company ? $this->user->company->jobs : null;
     }
 }

@@ -21,7 +21,13 @@ const CandidateRoutes = [
                     meta: {
                         title: 'Candidate Dashboard',
                     },
-
+                    beforeEnter: async (to, from, next) => {
+                        if (store.getters.USER_DATA.candidate) {
+                            next()
+                        } else {
+                            next({ name: 'CandidateProfileCreate' })
+                        }
+                    }
                 },
                 {
                     path: 'profile/',
@@ -87,7 +93,14 @@ const CandidateRoutes = [
                                     title: 'Candidatures',
                                 },
                             }
-                        ]
+                        ],
+                    beforeEnter: async (to, from, next) => {
+                        if (store.getters.USER_DATA.candidate) {
+                            next()
+                        } else {
+                            next({ name: 'CandidateProfileCreate' })
+                        }
+                    }
                 },
                 {
                     path: 'interview/',
@@ -101,7 +114,14 @@ const CandidateRoutes = [
                                 title: 'All interviews'
                             }
                         }
-                    ]
+                    ],
+                    beforeEnter: async (to, from, next) => {
+                        if (store.getters.USER_DATA.candidate) {
+                            next()
+                        } else {
+                            next({ name: 'CandidateProfileCreate' })
+                        }
+                    }
                 }
             ],
         beforeEnter: (to, from, next) => {

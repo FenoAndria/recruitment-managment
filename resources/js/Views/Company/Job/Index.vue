@@ -88,7 +88,6 @@ export default {
         .then((result) => {
           this.$store.commit("SetJobs", result.data.jobs);
           this.loading = false;
-          console.log(result.data.jobs[0]);
         })
         .catch((err) => {
           console.log(err);

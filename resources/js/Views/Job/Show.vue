@@ -37,20 +37,29 @@
               <hr class="border border-green-500 mt-1" />
               <div class="mt-1">
                 <div class="float-right">
-                  <span
-                    v-if="this.candidatureExists"
-                    class="font-bold text-danger-500"
-                    ><i class="bi bi-check-circle"></i> Candidature
-                    sended!</span
+                  <div
+                    class=""
+                    v-if="this.$store.getters.USER_DATA.candidate.resume"
                   >
-                  <SubmitButton
-                    class="btn-sm"
-                    :loading="this.loadingSubmit"
-                    @click.prevent="submit"
-                    v-else
-                  >
-                    Apply
-                  </SubmitButton>
+                    <span
+                      v-if="this.candidatureExists"
+                      class="font-bold text-danger-500"
+                      ><i class="bi bi-check-circle"></i> Candidature
+                      sended!</span
+                    >
+                    <SubmitButton
+                      class="btn-sm"
+                      :loading="this.loadingSubmit"
+                      @click.prevent="submit"
+                      v-else
+                    >
+                      Apply
+                    </SubmitButton>
+                  </div>
+                  <div class="font-bold text-danger-500" v-else>
+                    <i class="bi bi-check-circle"></i> You need to upload your
+                    Resume to apply!
+                  </div>
                 </div>
                 <h4 class="text-sm text-gray-500">
                   Published at :
@@ -84,7 +93,7 @@ export default {
     CandidateLayout,
     Card,
     SubmitButton,
-    Loader
+    Loader,
   },
   computed: {
     ...mapGetters(["job"]),

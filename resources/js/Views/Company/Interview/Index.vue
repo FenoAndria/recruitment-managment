@@ -43,6 +43,7 @@
             </tbody>
           </table>
         </div>
+        <div class="text-center text-lg font-semibold">Empty</div>
       </div>
     </Card>
   </CompanyLayout>

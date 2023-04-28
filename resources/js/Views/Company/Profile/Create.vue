@@ -1,53 +1,65 @@
 <template>
-  <CompanyLayout>
-    <h1 class="text-2xl">PROFILE CREATE</h1>
-    <div class="">
-      <form @submit.prevent="storeCompany">
-        <div class="">
-          <label for="">Brand</label>
-          <input type="file" @change="fileChanged" />
-        </div>
-        <div class="">
-          <label for="">Name</label>
-          <input type="text" v-model="this.company.name" />
-        </div>
-        <div class="">
-          <label for="">Address</label>
-          <input type="text" v-model="this.company.address" />
-        </div>
-        <div class="">
-          <label for="">City</label>
-          <input type="text" v-model="this.company.city" />
-        </div>
-        <div class="">
-          <label for="">Country</label>
-          <input type="text" v-model="this.company.country" />
-        </div>
-        <div class="">
-          <label for="">Phone</label>
-          <input type="text" v-model="this.company.phone" />
-        </div>
-        <div class="">
-          <label for="">Website</label>
-          <input type="text" v-model="this.company.website" />
-        </div>
-        <div class="">
-          <label for="">Description</label>
-          <input type="text" v-model="this.company.description" />
-        </div>
-        <button class="btn">SAVE</button>
-      </form>
+  <NoProfileLayout :links="[{ tag: 'Profile', name: 'CompanyProfileCreate' }]">
+    <div class="flex justify-center">
+      <Card class="w-3/4">
+        <form @submit.prevent="storeCompany">
+          <div class="x-form">
+            <label for="">Brand</label>
+            <input type="file" @change="fileChanged" class="x-input" />
+          </div>
+          <div class="x-form">
+            <label for="">Name</label>
+            <input type="text" v-model="this.company.name" class="x-input" />
+          </div>
+          <div class="x-form">
+            <label for="">Address</label>
+            <input type="text" v-model="this.company.address" class="x-input" />
+          </div>
+          <div class="x-form">
+            <label for="">City</label>
+            <input type="text" v-model="this.company.city" class="x-input" />
+          </div>
+          <div class="x-form">
+            <label for="">Country</label>
+            <input type="text" v-model="this.company.country" class="x-input" />
+          </div>
+          <div class="x-form">
+            <label for="">Phone</label>
+            <input type="text" v-model="this.company.phone" class="x-input" />
+          </div>
+          <div class="x-form">
+            <label for="">Website</label>
+            <input type="text" v-model="this.company.website" class="x-input" />
+          </div>
+          <div class="x-form">
+            <label for="">Description</label>
+            <textarea
+              v-model="this.company.description"
+              class="x-textarea"
+              cols="30"
+              rows="2"
+            ></textarea>
+          </div>
+          <SubmitButton
+            :loading="this.loadingSubmit"
+            class="btn-sm btn-success btn-block"
+            >Save</SubmitButton
+          >
+        </form>
+      </Card>
     </div>
-  </CompanyLayout> 
+  </NoProfileLayout>
 </template>
 <script>
 import { mapGetters } from "vuex";
-import CompanyLayout from "./../../../Components/Layouts/CompanyLayout.vue";
+import NoProfileLayout from "./../../../Components/Layouts/NoProfileLayout.vue";
+import Card from "./../../../Components/Layouts/Card.vue";
+import SubmitButton from "./../../../Components/Layouts/SubmitButton.vue";
 export default {
   name: "CompanyProfileCreate",
   data() {
     return {
-      loading: false,
+      loadingSubmit: false,
       company: {
         brand: "",
         name: "Savony tropicale",
@@ -61,7 +73,9 @@ export default {
     };
   },
   components: {
-    CompanyLayout,
+    NoProfileLayout,
+    Card,
+    SubmitButton,
   },
   computed: {},
   methods: {
@@ -69,6 +83,7 @@ export default {
       this.company.brand = e.target.files[0];
     },
     async storeCompany() {
+      this.loadingSubmit = true;
       let companyData = new FormData();
       companyData.append("brand", this.company.brand);
       companyData.append("name", this.company.name);
@@ -82,16 +97,16 @@ export default {
         .dispatch("StoreCompany", companyData)
         .then((result) => {
           this.$store.commit("SET_COMPANY", result.data.company);
-          location.reload()
-          console.log(result.data.company);
+          location.reload();
+          this.loadingSubmit = false;
           // this.$router.push({ name: "CompanyProfileIndex" });
         })
         .catch((err) => {
+          this.loadingSubmit = false;
           console.log(err.response);
         });
     },
   },
-  created() {
-  },
+  created() {},
 };
 </script>

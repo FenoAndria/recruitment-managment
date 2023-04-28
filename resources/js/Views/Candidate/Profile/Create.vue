@@ -1,5 +1,5 @@
 <template>
-  <CandidateLayout>
+  <NoProfileLayout :links="[{ tag: 'Profile', name: 'CandidateProfileCreate' }]">
     <div class="flex items-center justify-center">
       <Card class="w-3/4">
         <form @submit.prevent="storeCandidate">
@@ -70,11 +70,11 @@
         </form>
       </Card>
     </div>
-  </CandidateLayout>
+  </NoProfileLayout>
 </template>
 <script>
 import { mapGetters } from "vuex";
-import CandidateLayout from "./../../../Components/Layouts/CandidateLayout.vue";
+import NoProfileLayout from "./../../../Components/Layouts/NoProfileLayout.vue";
 import Card from "./../../../Components/Layouts/Card.vue";
 import SubmitButton from "./../../../Components/Layouts/SubmitButton.vue";
 import ValidationError from "./../../../Components/Layouts/ValidationError.vue";
@@ -102,7 +102,7 @@ export default {
     };
   },
   components: {
-    CandidateLayout,
+    NoProfileLayout,
     Card,
     SubmitButton,
     ValidationError,
@@ -134,7 +134,7 @@ export default {
         .then((result) => {
           this.$store.commit("SET_CANDIDATE", result.data.candidate);
           // this.$router.push({ name: "CandidateProfileIndex" });
-          location.reload()
+          location.reload();
           this.loadingSubmit = false;
         })
         .catch((err) => {

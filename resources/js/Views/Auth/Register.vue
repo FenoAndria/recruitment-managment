@@ -89,8 +89,9 @@ export default {
         .dispatch("REGISTER", this.user)
         .then((result) => {
           this.loadingSubmit = false;
+          this.$store.commit("SET_USER_DATA", result.data.user);
           localStorage.setItem("userToken", result.data.user.token);
-          location.reload();
+          location.reload(); 
         })
         .catch((err) => {
           this.loadingSubmit = false;

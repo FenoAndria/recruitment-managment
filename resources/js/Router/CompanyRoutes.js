@@ -27,7 +27,13 @@ const CompanyRoutes = [
                     meta: {
                         title: 'Company Dashboard',
                     },
-
+                    beforeEnter: async (to, from, next) => {
+                        if (store.getters.USER_DATA.company) {
+                            next()
+                        } else {
+                            next({ name: 'CompanyProfileCreate' })
+                        }
+                    }
                 },
                 {
                     path: 'profile/',
@@ -131,6 +137,13 @@ const CompanyRoutes = [
                             ]
                         }
                     ],
+                    beforeEnter: async (to, from, next) => {
+                        if (store.getters.USER_DATA.company) {
+                            next()
+                        } else {
+                            next({ name: 'CompanyProfileCreate' })
+                        }
+                    }
                 },
                 {
                     path: 'interview/',
@@ -144,7 +157,14 @@ const CompanyRoutes = [
                                 title: 'All interviews'
                             }
                         }
-                    ]
+                    ],
+                    beforeEnter: async (to, from, next) => {
+                        if (store.getters.USER_DATA.company) {
+                            next()
+                        } else {
+                            next({ name: 'CompanyProfileCreate' })
+                        }
+                    }
                 }
             ],
         beforeEnter: (to, from, next) => {
